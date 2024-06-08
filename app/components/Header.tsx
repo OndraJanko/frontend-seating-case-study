@@ -18,7 +18,7 @@ function HeaderLogo() {
   );
 }
 function Signature() {
-  return <h3 className="hidden md:block">app by Ondra Janko</h3>;
+  return <h3 className="text-sm italic md:text-lg">app by Ondra Janko</h3>;
 }
 
 export default function Header() {
