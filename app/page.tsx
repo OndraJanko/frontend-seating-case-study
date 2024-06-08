@@ -4,7 +4,7 @@ import PriceFooter from "@/components/PriceFooter";
 
 function Event() {
   return (
-    <div className="flex flex-row gap-5">
+    <div className="flex w-full flex-row gap-5 overflow-auto px-5 py-8 lg:px-32">
       <EventDetails />
       <EventSeats />
     </div>
@@ -13,7 +13,7 @@ function Event() {
 
 export default function Home() {
   return (
-    <main className="debug flex min-h-screen flex-col items-center justify-center">
+    <main className="flex h-full flex-col items-center justify-start">
       <Event />
       <PriceFooter />
     </main>

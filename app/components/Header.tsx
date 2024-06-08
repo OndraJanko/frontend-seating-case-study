@@ -13,8 +13,12 @@ function HeaderLogo() {
           <div className="from-gradient-start via-gradient-middle to-gradient-end absolute inset-0 rounded-full bg-gradient-to-bl opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100"></div>
         </div>
       </Link>
-      <div className="flex items-center justify-center rounded-full bg-black p-8" />
-      <div className="flex items-center justify-center rounded-full bg-black p-6" />
+      {/* <div className="flex items-center justify-center rounded-full bg-black p-8" /> */}
+      <div className="flex h-14 w-14 items-center justify-center bg-black" />
+
+      <div className="flex items-center justify-center">
+        <div className="triangle" />
+      </div>
       <Signature />
     </div>
   );
@@ -27,7 +31,7 @@ function Signature() {
 
 export default function Header() {
   return (
-    <header className="min-w-screen glass_bg sticky top-0 z-[100000] flex flex-row items-center justify-between px-52 py-8">
+    <header className="glass_bg min-w-screen sticky top-0 z-[10] flex flex-row items-center justify-between px-5 py-8 lg:px-32">
       <HeaderLogo />
       <Login />
     </header>
