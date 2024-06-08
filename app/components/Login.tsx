@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CiMenuBurger } from "react-icons/ci";
 
 export default function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
