@@ -45,28 +45,30 @@ export default function Login() {
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Name
+                <Label htmlFor="Email" className="text-right">
+                  Email
                 </Label>
                 <Input
-                  id="name"
-                  defaultValue="Pedro Duarte"
+                  id="Email"
+                  defaultValue=""
                   className="col-span-3"
+                  type="email"
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
-                  Username
+                <Label htmlFor="Password" className="text-right">
+                  Password
                 </Label>
                 <Input
-                  id="username"
-                  defaultValue="@peduarte"
+                  id="Password"
+                  defaultValue=""
                   className="col-span-3"
+                  type="password"
                 />
               </div>
             </div>
             <DialogFooter>
-              <Button type="submit">Save changes</Button>
+              <Button type="submit">Login</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

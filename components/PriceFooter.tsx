@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 
 function TicketInfo() {
@@ -12,7 +13,13 @@ export default function PriceFooter() {
   return (
     <footer className="flex h-[50px] w-full flex-row items-center justify-end gap-10 border-t-2 bg-white px-5 py-16 lg:px-32">
       <TicketInfo />
-      <Button variant="default" className="text-2xl">
+      <Button
+        variant="default"
+        className="md:text-2xl"
+        onClick={() => {
+          console.log("checkout");
+        }}
+      >
         Checkout
       </Button>
     </footer>
