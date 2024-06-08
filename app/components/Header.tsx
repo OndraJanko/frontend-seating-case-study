@@ -6,32 +6,24 @@ function HeaderLogo() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-4">
       <Link href="/">
-        <div className="group relative inline-block rounded-full bg-black p-4 text-6xl text-white transition-colors duration-500 ease-in-out">
+        <div className="group relative inline-block rounded-full bg-black p-2 text-6xl text-white">
           <div className="relative z-10">
             <FaReact />
           </div>
           <div className="absolute inset-0 rounded-full bg-gradient-to-bl from-gradient-start via-gradient-middle to-gradient-end opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100"></div>
         </div>
       </Link>
-      {/* <div className="flex items-center justify-center rounded-full bg-black p-8" /> */}
-      <div className="flex h-14 w-14 items-center justify-center bg-black" />
-
-      <div className="flex items-center justify-center">
-        <div className="triangle" />
-      </div>
       <Signature />
     </div>
   );
 }
 function Signature() {
-  return (
-    <h3 className="item-center flex justify-center">app by Ondra Janko</h3>
-  );
+  return <h3 className="hidden md:block">app by Ondra Janko</h3>;
 }
 
 export default function Header() {
   return (
-    <header className="glass_bg min-w-screen sticky top-0 z-[10] flex flex-row items-center justify-between px-5 py-2 md:py-8 lg:px-32">
+    <header className="glass_bg min-w-screen sticky top-0 z-[10] flex flex-row items-center justify-between px-4 py-1 md:py-8 lg:px-32">
       <HeaderLogo />
       <Login />
     </header>
