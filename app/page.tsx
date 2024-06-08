@@ -1,11 +1,15 @@
 import Event from "@/components/Event";
 import PriceFooter from "@/components/PriceFooter";
+import { fetchEvent } from "@/lib/fetchers";
+import QueryProvider from "./_components/queryprovider";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <main className="flex h-full flex-col items-center justify-start">
-      <Event />
-      <PriceFooter />
-    </main>
+    <QueryProvider>
+      <main className="flex h-full flex-col items-center justify-start">
+        <Event />
+        <PriceFooter />
+      </main>
+    </QueryProvider>
   );
 }
