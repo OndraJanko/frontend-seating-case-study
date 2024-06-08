@@ -5,7 +5,22 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatDateRange(dateFrom: string, dateTo: string) {
+function isValidDateFormat(date: string): boolean {
+  const dateFormatRegex =
+    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}(Z|[+-]\d{2}:\d{2})$/;
+  return dateFormatRegex.test(date);
+}
+
+export function formatDateRange(dateFrom: string, dateTo: string): string {
+  if (
+    !dateFrom ||
+    !dateTo ||
+    !isValidDateFormat(dateFrom) ||
+    !isValidDateFormat(dateTo)
+  ) {
+    return "N/A";
+  }
+
   const fromDate = new Date(dateFrom);
   const toDate = new Date(dateTo);
 

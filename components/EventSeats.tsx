@@ -1,5 +1,4 @@
 "use client";
-import { EventTicketsResponse } from "@/lib/types";
 import { useEvent } from "@/lib/hooks";
 import Seat from "./Seat";
 
@@ -22,9 +21,17 @@ export default function EventSeats() {
 
   console.log(data);
   return (
-    <div className="white_bg relative z-[1] flex h-full w-full flex-wrap gap-1 rounded-md px-7 py-9 pb-24">
+    <div className="white_bg z-[1] flex h-full w-full flex-wrap items-center justify-center gap-1 rounded-md px-7 py-9">
       {data.seatRows.map((row) =>
-        row.seats.map((seat) => <Seat key={seat.seatId} {...seat} />),
+        row.seats.map((seat) => (
+          <Seat
+            key={seat.seatId}
+            id={seat.seatId}
+            place={seat.place}
+            ticketTypeId={seat.ticketTypeId}
+            seatRow={row.seatRow}
+          />
+        )),
       )}
     </div>
   );
