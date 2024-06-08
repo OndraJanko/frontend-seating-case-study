@@ -1,6 +1,6 @@
 export default function EventDetails() {
   return (
-    <div className="glass_bg flex h-full w-1/3 flex-col rounded-md px-7 py-9">
+    <div className="glass_bg flex h-full w-full flex-col rounded-md px-7 py-9 md:w-1/3">
       <div className="mb-10 h-[200px] w-full max-w-[400px] rounded-md bg-black">
         image here
       </div>
