@@ -32,7 +32,7 @@ export default function Login() {
       ) : (
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="default" className="md:text-2xl">
+            <Button variant="default" className="md:text-xl">
               Login
             </Button>
           </DialogTrigger>

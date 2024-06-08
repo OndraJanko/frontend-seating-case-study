@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Header from "./_components/Header";
 import { ReactNode } from "react";
 import QueryProvider from "./_components/queryprovider";
+import ReduxProvider from "./_components/reduxprovider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className="!scroll-smooth">
       <body className={`${inter.className} antialiased`}>
         <QueryProvider>
-          <Header />
-          {children}
-          <SpeedInsights />
+          <ReduxProvider>
+            <Header />
+            {children}
+            <SpeedInsights />
+          </ReduxProvider>
         </QueryProvider>
       </body>
     </html>

@@ -1,7 +1,8 @@
+"use client";
 import EventDetails from "@/components/EventDetails";
 import EventSeats from "@/components/EventSeats";
 
-export default function Event() {
+export default function EventContainer() {
   return (
     <div className="flex w-full flex-col gap-5 px-5 py-8 md:flex-row lg:px-20">
       <div className="relative flex h-full w-full md:w-1/3">

@@ -23,7 +23,7 @@ function Signature() {
 
 export default function Header() {
   return (
-    <header className="glass_bg min-w-screen sticky top-0 z-[10] flex flex-row items-center justify-between px-4 py-1 md:py-8 lg:px-32">
+    <header className="glass_bg min-w-screen sticky top-0 z-[10] flex flex-row items-center justify-between px-4 py-1 md:py-4 lg:px-32">
       <HeaderLogo />
       <Login />
     </header>

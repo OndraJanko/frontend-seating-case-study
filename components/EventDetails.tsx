@@ -1,12 +1,14 @@
 "use client";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import useEvent from "@/lib/hooks";
+import { useEvent } from "@/lib/hooks";
 import { useEffect } from "react";
 import { formatDateRange } from "@/lib/utils";
 
 export default function EventDetails() {
-  const { data, isLoading, error } = useEvent();
+  const {
+    eventQuery: { data, isLoading, error },
+  } = useEvent();
 
   useEffect(() => {
     if (data) {
@@ -59,7 +61,7 @@ export default function EventDetails() {
         <h2 className="text-lg font-bold">Date</h2>
         <p className="mb-5">{formatDateRange(data.dateFrom, data.dateTo)}</p>
       </section>
-      <Button variant="default" className="md:text-2xl">
+      <Button variant="default" className="md:text-xl">
         Add to calendar
       </Button>
     </div>
