@@ -1,14 +1,18 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
-import { fetchEvent } from "@/lib/fetchers";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import useEvent from "@/lib/hooks";
+import { useEffect } from "react";
+import { formatDateRange } from "@/lib/utils";
 
 export default function EventDetails() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["event"],
-    queryFn: fetchEvent,
-  });
+  const { data, isLoading, error } = useEvent();
+
+  useEffect(() => {
+    if (data) {
+      document.title = `Ticket App - ${data.namePub}`;
+    }
+  }, [data]);
 
   if (isLoading) {
     return (
@@ -35,15 +39,26 @@ export default function EventDetails() {
 
   return (
     <div className="white_bg z-[1] flex h-full w-full flex-col rounded-md px-7 py-9">
+      <h1 className="mb-5 text-xl font-bold">{data.namePub}</h1>
       <Image
         src={data.headerImageUrl}
-        alt="event image"
-        width={400}
+        alt="Image of the event"
+        width={500}
         height={200}
-        className="rounded-md"
+        className="mb-3 rounded-md"
       />
-      <h2 className="mb-5">{data.namePub}</h2>
-      <p className="mb-5">{data.description}</p>
+      <section>
+        <h2 className="text-lg font-bold">About</h2>
+        <p className="mb-5">{data.description}</p>
+      </section>
+      <section>
+        <h2 className="text-lg font-bold">At</h2>
+        <p className="mb-5">{data.place}</p>
+      </section>
+      <section>
+        <h2 className="text-lg font-bold">Date</h2>
+        <p className="mb-5">{formatDateRange(data.dateFrom, data.dateTo)}</p>
+      </section>
       <Button variant="default" className="md:text-2xl">
         Add to calendar
       </Button>
