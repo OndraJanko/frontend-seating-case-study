@@ -58,11 +58,11 @@ export default function EventDetails() {
         <p className="mb-5">{data.description}</p>
       </section>
       <section>
-        <h2 className="text-lg font-bold">At</h2>
+        <h2 className="text-lg font-bold">Event Venue</h2>
         <p className="mb-5">{data.place}</p>
       </section>
       <section>
-        <h2 className="text-lg font-bold">Date</h2>
+        <h2 className="text-lg font-bold">Date and Time</h2>
         <p className="mb-5">{formatDateRange(data.dateFrom, data.dateTo)}</p>
       </section>
       <Button variant="default" className="md:text-xl">
