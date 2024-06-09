@@ -1,2 +1,1 @@
-Dokumentace, komentáře a další informace k projektu
-remove redux and use react-query
+Documentation, comments and other information about the project

@@ -32,23 +32,31 @@ export default function Seat({
   );
 
   const handleSeatClick = () => {
-    const seat = { id, name: ticketTypeName, price };
-    const action = isSelected ? removeFromCart({ id }) : addToCart(seat);
-    dispatch(action);
+    if (ticketTypeName !== "Empty") {
+      const seat = { id, name: ticketTypeName, price };
+      const action = isSelected ? removeFromCart({ id }) : addToCart(seat);
+      dispatch(action);
+    }
   };
 
-  return (
+  const seatContent = (
+    <div
+      onClick={ticketTypeName !== "Empty" ? handleSeatClick : undefined}
+      className={`z-0 flex h-10 w-10 items-center justify-center rounded-full ${
+        ticketTypeName === "Empty"
+          ? "bg-black text-white"
+          : isSelected
+            ? "cursor-pointer border-2 border-black bg-zinc-200"
+            : "cursor-pointer bg-zinc-100 hover:bg-zinc-200"
+      }`}
+    >
+      <span className="text-sm font-medium">{place}</span>
+    </div>
+  );
+
+  return ticketTypeName !== "Empty" ? (
     <HoverCard>
-      <HoverCardTrigger asChild>
-        <div
-          onClick={handleSeatClick}
-          className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-full ${isSelected ? "border-2 border-black bg-zinc-100" : "bg-zinc-100 hover:bg-zinc-200"} `}
-        >
-          <span className="text-sm font-medium text-black">
-            {seatRow + ";" + place}
-          </span>
-        </div>
-      </HoverCardTrigger>
+      <HoverCardTrigger asChild>{seatContent}</HoverCardTrigger>
       <HoverCardContent className="space-y-2 p-4 text-left text-sm">
         <div>
           <h4 className="font-semibold">Ticket: {ticketTypeName}</h4>
@@ -58,5 +66,7 @@ export default function Seat({
         </div>
       </HoverCardContent>
     </HoverCard>
+  ) : (
+    seatContent
   );
 }
