@@ -12,14 +12,18 @@ export default function EventSeats() {
   } = useEvent();
 
   const [zoomLevel, setZoomLevel] = useState(1);
+  const [defaultZoomLevel, setDefaultZoomLevel] = useState(1);
   const handleZoomIn = () => setZoomLevel((prev) => Math.min(prev + 0.1, 2));
   const handleZoomOut = () => setZoomLevel((prev) => Math.max(prev - 0.2, 0.2));
-  const handleResetZoom = () => setZoomLevel(1);
+  const handleResetZoom = () => setZoomLevel(defaultZoomLevel);
 
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
     if (isMobile) {
-      setZoomLevel(0.8);
+      setDefaultZoomLevel(0.5);
+      setZoomLevel(0.5);
+    } else {
+      setDefaultZoomLevel(1);
     }
   }, []);
 
