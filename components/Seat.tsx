@@ -3,8 +3,15 @@ type SeatProps = {
   place: number;
   ticketTypeId: string;
   seatRow: number;
+  price: number;
 };
-export default function Seat({ id, place, ticketTypeId, seatRow }: SeatProps) {
+export default function Seat({
+  id,
+  place,
+  ticketTypeId,
+  seatRow,
+  price,
+}: SeatProps) {
   return (
     <div className="transition-color flex size-12 items-center justify-center rounded-full bg-zinc-100 hover:bg-zinc-200">
       <span className="text-md font-medium text-zinc-400">

@@ -10,8 +10,10 @@ import ReduxProvider from "./_components/reduxprovider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ticket app",
-  description: "Simple ticket app for NFCTron",
+  title: "Event Seating App",
+  description:
+    "Easily purchase tickets for your favorite events with our seating map. Choose your seats and buy tickets securely online.",
+  keywords: "event tickets, buy tickets, seating map, online ticket purchase",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

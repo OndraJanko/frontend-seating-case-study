@@ -12,7 +12,7 @@ export default function EventDetails() {
 
   useEffect(() => {
     if (data) {
-      document.title = `Ticket App - ${data.namePub}`;
+      document.title = `Event Seating App - ${data.namePub}`;
     }
   }, [data]);
 
