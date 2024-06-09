@@ -5,7 +5,7 @@ import Signature from "@/components/Signature";
 
 export default async function Home() {
   return (
-    <main className="flex w-full flex-col gap-5 px-3 py-8 md:flex-row md:px-5 lg:px-20">
+    <main className="flex w-full flex-col gap-5 overflow-x-hidden px-3 py-8 md:flex-row md:px-5 lg:px-20">
       <div className="relative flex h-full w-full md:w-1/3">
         <EventDetails />
         <div className="gradient_bg absolute left-[-5px] top-[-5px] z-0 h-full w-full rounded-md md:left-[-10px] md:top-[-10px] lg:left-[-20px] lg:top-[-20px]" />
