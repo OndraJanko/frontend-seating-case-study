@@ -108,7 +108,7 @@ export default function EventSeats() {
               className="mb-2"
               style={{
                 display: "grid",
-                gridTemplateColumns: `minmax(20px, auto) repeat(${maxColumns}, minmax(40px, 1fr)) minmax(20px, auto)`,
+                gridTemplateColumns: `minmax(40px, auto) repeat(${maxColumns}, minmax(40px, 1fr)) minmax(40px, auto)`,
                 gap: "0.5rem",
               }}
             >
