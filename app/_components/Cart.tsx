@@ -8,17 +8,28 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "@/store/cartSlice";
+import { removeFromCart, clearCart } from "@/store/cartSlice";
 import useEvent from "@/hooks/useEvent";
+import { useEffect } from "react";
 
 export default function Cart() {
   const cartItems = useSelector((state: RootState) => state.cart.cart);
   const dispatch = useDispatch();
-  const { currencyIso } = useEvent();
+  const {
+    currencyIso,
+    seatsQuery: { data },
+  } = useEvent();
 
   const handleRemoveFromCart = (itemId: string) => {
     dispatch(removeFromCart({ id: itemId }));
   };
+
+  // Clear the cart when the event seats data changes
+  useEffect(() => {
+    if (data) {
+      dispatch(clearCart());
+    }
+  }, [data, dispatch]);
 
   return (
     <Popover>
@@ -40,14 +51,20 @@ export default function Cart() {
           </svg>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="max-h-[300px] w-80 overflow-auto">
-        <div className="grid gap-4">
-          <div className="space-y-2">
-            <h4 className="font-medium leading-none">Cart</h4>
-            <p className="text-sm text-muted-foreground">
-              Here you can see your order.
-            </p>
-          </div>
+      <PopoverContent className="max-h-[300px] w-80 overflow-auto px-0 pt-0">
+        <div className="sticky top-0 space-y-2 border-b border-gray-200 bg-white px-2 py-4">
+          <h4 className="font-medium leading-none">Cart</h4>
+          <p className="text-sm text-muted-foreground">
+            Here you can see your order.
+          </p>
+        </div>
+        <div className="grid gap-4 px-2 py-4">
+          {cartItems.length === 0 && (
+            <div>
+              Oops! Your cart is empty. Find an exciting event and add some
+              tickets to your cart!
+            </div>
+          )}
           {cartItems.map((item) => (
             <div
               key={item.id}

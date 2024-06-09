@@ -70,6 +70,15 @@ type OrderResponse = {
   totalAmount: number;
 };
 
+type ProcessedSeat = {
+  seatId: UUID;
+  place: number;
+  ticketTypeId: string;
+  price: number;
+  ticketTypeName: string;
+  seatRow: number;
+};
+
 export type {
   UUID,
   Event,
@@ -81,4 +90,5 @@ export type {
   LoginResponse,
   OrderRequest,
   OrderResponse,
+  ProcessedSeat,
 };

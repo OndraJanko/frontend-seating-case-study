@@ -4,8 +4,11 @@ import {
   Seat,
   Ticket,
   SeatRow,
+  ProcessedSeat,
+  LoginResponse,
 } from "@/lib/types";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { LoginFormInputs } from "./validationSchemas";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -18,9 +21,7 @@ export async function fetchEvent(): Promise<Event> {
 }
 export async function fetchEventSeats(
   eventId: string,
-): Promise<
-  (Seat & { price: number; ticketTypeName: string; seatRow: number })[]
-> {
+): Promise<ProcessedSeat[]> {
   if (!apiUrl) {
     throw new Error("API_URL is not set");
   }
@@ -48,4 +49,10 @@ export async function fetchEventSeats(
   );
 
   return processedSeats;
+}
+
+export async function fetchUser(
+  data: LoginFormInputs,
+): Promise<AxiosResponse<LoginResponse>> {
+  return axios.post<LoginResponse>(`${apiUrl}/login`, data);
 }

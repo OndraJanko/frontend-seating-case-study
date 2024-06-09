@@ -34,11 +34,9 @@ export default function Seat({
   );
 
   const handleSeatClick = () => {
-    if (ticketTypeName !== "Taken") {
-      const seat = { id, name: ticketTypeName, price };
-      const action = isSelected ? removeFromCart({ id }) : addToCart(seat);
-      dispatch(action);
-    }
+    const seat = { id, name: ticketTypeName, price };
+    const action = isSelected ? removeFromCart({ id }) : addToCart(seat);
+    dispatch(action);
   };
 
   const seatContent = (

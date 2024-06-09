@@ -1,78 +1,60 @@
 "use client";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import LoginDialog from "./LoginDialog";
+import useAuth from "@/hooks/useAuth";
+import { useEffect } from "react";
+import { loadUserFromStorage } from "@/store/userSlice";
 
 export default function Login() {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+  const user = useSelector((state: RootState) => state.user.user);
+  const { handleLogout } = useAuth();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUserFromStorage());
+  }, [dispatch]);
+
+  const userProfilePictureUrl =
+    "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg";
+
   return (
     <div>
-      {isLoggedIn ? (
-        <div className="flex flex-row items-center justify-center gap-4 text-2xl">
-          ondra janko
-          <Avatar>
-            <AvatarImage
-              src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-              alt="user avatar image"
-            />
-            <AvatarFallback>avatar</AvatarFallback>
-          </Avatar>
-        </div>
-      ) : (
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="default" className="md:text-xl">
-              Login
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Login into your profile</DialogTitle>
-              <DialogDescription>
-                Once you log in, you&apos;ll be able to proceed with checking
-                out your order.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="Email" className="text-right">
-                  Email
-                </Label>
-                <Input
-                  id="Email"
-                  defaultValue=""
-                  className="col-span-3"
-                  type="email"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="Password" className="text-right">
-                  Password
-                </Label>
-                <Input
-                  id="Password"
-                  defaultValue=""
-                  className="col-span-3"
-                  type="password"
-                />
-              </div>
+      {isLoggedIn && user ? (
+        <Popover>
+          <PopoverTrigger asChild>
+            <Avatar className="cursor-pointer">
+              <AvatarImage
+                src={userProfilePictureUrl}
+                alt="user avatar image"
+              />
+              <AvatarFallback>avatar</AvatarFallback>
+            </Avatar>
+          </PopoverTrigger>
+          <PopoverContent className="max-h-[300px] w-80 max-w-[300px] overflow-auto">
+            <h3 className="font-bold">User</h3>
+            <p className="mb-3 text-sm">
+              {user.firstName} {user.lastName}
+            </p>
+            <h3 className="font-bold">Email</h3>
+            <p className="text-sm">{user.email}</p>
+            <div className="flex items-center justify-end">
+              <Button variant="default" onClick={handleLogout}>
+                Logout
+              </Button>
             </div>
-            <DialogFooter>
-              <Button type="submit">Login</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+          </PopoverContent>
+        </Popover>
+      ) : (
+        <LoginDialog />
       )}
     </div>
   );
