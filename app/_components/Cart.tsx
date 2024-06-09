@@ -57,10 +57,10 @@ export default function Cart() {
               </div>
               <Button
                 size="sm"
-                className=""
+                className="h-2 w-2 p-3"
                 onClick={() => handleRemoveFromCart(item.id)}
               >
-                X
+                x
               </Button>
             </div>
           ))}
