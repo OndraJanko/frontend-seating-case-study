@@ -1,10 +1,16 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 function TicketInfo() {
+  const totalItems = useSelector((state: RootState) => state.cart.totalAmount);
+  const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
+
   return (
     <div className="flex flex-col items-start justify-center gap-2">
-      <div className="text-md">Total for 0 tickets</div>
-      <div className="text-xl font-bold">0 CZK</div>
+      <div className="text-md">Total for {totalItems} tickets</div>
+      <div className="text-xl font-bold">{totalPrice} CZK</div>
     </div>
   );
 }

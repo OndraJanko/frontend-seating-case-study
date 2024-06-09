@@ -19,9 +19,7 @@ export default function EventDetails() {
   if (isLoading) {
     return (
       <div className="white_bg z-[1] flex h-full w-full flex-col rounded-md px-7 py-9">
-        <div className="mb-10 h-[200px] w-full max-w-[400px] rounded-md bg-black">
-          image here
-        </div>
+        <div className="mb-10 h-[200px] w-full max-w-[400px] rounded-md bg-black"></div>
         <h2 className="mb-5">Loading</h2>
         <p className="mb-5">Loading</p>
         <Button variant="default" className="md:text-2xl">

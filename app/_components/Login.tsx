@@ -38,9 +38,10 @@ export default function Login() {
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
+              <DialogTitle>Login into your profile</DialogTitle>
               <DialogDescription>
-                Make changes to your profile here. Click save when youre done.
+                Once you log in, you&apos;ll be able to proceed with checking
+                out your order.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
