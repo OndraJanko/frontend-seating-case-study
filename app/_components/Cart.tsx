@@ -38,7 +38,7 @@ export default function Cart() {
           </svg>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 overflow-auto">
+      <PopoverContent className="max-h-[300px] w-80 overflow-auto">
         <div className="grid gap-4">
           <div className="space-y-2">
             <h4 className="font-medium leading-none">Cart</h4>
