@@ -11,7 +11,7 @@ export default function SeatMapZoom({
   handleResetZoom,
 }: ZoomControlProps) {
   return (
-    <div className="z-10 mb-4 flex gap-2">
+    <div className="z-10 mb-4 flex gap-2 px-4">
       <Button onClick={handleZoomOut}>-</Button>
       <Button onClick={handleZoomIn}>+</Button>
       <Button onClick={handleResetZoom}>Reset</Button>
