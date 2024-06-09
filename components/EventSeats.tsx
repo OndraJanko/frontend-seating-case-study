@@ -2,7 +2,7 @@
 import { useEvent } from "@/lib/hooks";
 import Seat from "./Seat";
 import { Seat as SeatType } from "@/lib/types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SeatMapZoom from "./SeatMapZoom";
 import SeatLegend from "./SeatLegend";
 
@@ -15,6 +15,14 @@ export default function EventSeats() {
   const handleZoomIn = () => setZoomLevel((prev) => Math.min(prev + 0.1, 2));
   const handleZoomOut = () => setZoomLevel((prev) => Math.max(prev - 0.2, 0.2));
   const handleResetZoom = () => setZoomLevel(1);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      setZoomLevel(0.8);
+    }
+  }, []);
+
   const seatTypes = [
     { name: "VIP", color: "gold" },
     { name: "Regular", color: "silver" },
