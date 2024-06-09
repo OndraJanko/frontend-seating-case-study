@@ -9,6 +9,7 @@ export function processSeatRows(
       })[]
     | undefined,
 ) {
+  if (!data) return { sortedSeatRows: [], maxColumns: 0 };
   const seatRows = data.reduce(
     (acc, seat) => {
       if (!acc[seat.seatRow]) {
