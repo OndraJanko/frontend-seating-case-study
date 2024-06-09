@@ -30,6 +30,7 @@ export default function EventSeats() {
             place={seat.place}
             ticketTypeId={seat.ticketTypeId}
             seatRow={row.seatRow}
+            price={1}
           />
         )),
       )}
