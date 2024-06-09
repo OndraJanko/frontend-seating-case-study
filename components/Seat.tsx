@@ -42,7 +42,7 @@ export default function Seat({
   const seatContent = (
     <div
       onClick={ticketTypeName !== "Taken" ? handleSeatClick : undefined}
-      className={`z-0 flex h-8 w-8 items-center justify-center rounded-full md:h-10 md:w-10 ${
+      className={`z-0 flex h-10 w-10 items-center justify-center rounded-full ${
         ticketTypeName === "Taken"
           ? "bg-black text-white"
           : ticketTypeName === "VIP ticket"

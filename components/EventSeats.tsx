@@ -11,7 +11,7 @@ export default function EventSeats() {
     seatsQuery: { data, isLoading, error },
   } = useEvent();
 
-  const [zoomLevel, setZoomLevel] = useState(1);
+  const [zoomLevel, setZoomLevel] = useState(0.8);
   const [defaultZoomLevel, setDefaultZoomLevel] = useState(1);
   const handleZoomIn = () => setZoomLevel((prev) => Math.min(prev + 0.1, 2));
   const handleZoomOut = () => setZoomLevel((prev) => Math.max(prev - 0.2, 0.2));
@@ -23,7 +23,7 @@ export default function EventSeats() {
       setDefaultZoomLevel(0.5);
       setZoomLevel(0.5);
     } else {
-      setDefaultZoomLevel(1);
+      setDefaultZoomLevel(0.8);
     }
   }, []);
 
