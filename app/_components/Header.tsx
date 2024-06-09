@@ -15,18 +15,6 @@ function HeaderLogo() {
     </div>
   );
 }
-
-export default function Header() {
-  return (
-    <header className="glass_bg min-w-screen sticky top-0 z-[10] flex flex-row items-center justify-between px-4 py-1 md:py-4 lg:px-32">
-      <HeaderLogo />
-      <div className="flex flex-row items-center gap-4">
-        <Cart />
-        <Login />
-      </div>
-    </header>
-  );
-}
 // from https://coolshap.es/
 export const LogoShape = () => (
   <svg
@@ -120,3 +108,15 @@ export const LogoShape = () => (
     </defs>
   </svg>
 );
+
+export default function Header() {
+  return (
+    <header className="glass_bg min-w-screen sticky top-0 z-[10] flex flex-row items-center justify-between px-4 py-1 md:py-4 lg:px-20">
+      <HeaderLogo />
+      <div className="flex flex-row items-center gap-4">
+        <Cart />
+        <Login />
+      </div>
+    </header>
+  );
+}

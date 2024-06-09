@@ -40,7 +40,7 @@ export default function EventDetails() {
   }
 
   return (
-    <div className="white_bg z-[1] flex h-full w-full flex-col rounded-md px-7 py-9">
+    <div className="white_bg z-[1] flex h-full w-full flex-col rounded-md px-2 py-4 md:px-3 md:py-5">
       <h1 className="mb-5 text-xl font-bold">{data.namePub}</h1>
       <Image
         src={data.headerImageUrl}
