@@ -2,15 +2,19 @@
 import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import useEvent from "@/hooks/useEvent";
 
 function TicketInfo() {
   const totalItems = useSelector((state: RootState) => state.cart.totalAmount);
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
+  const { currencyIso } = useEvent();
 
   return (
     <div className="flex flex-col items-start justify-center gap-2">
       <div className="text-md">Total for {totalItems} tickets</div>
-      <div className="text-xl font-bold">{totalPrice} CZK</div>
+      <div className="text-xl font-bold">
+        {totalPrice} {currencyIso}
+      </div>
     </div>
   );
 }

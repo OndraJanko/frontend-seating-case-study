@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { useEvent } from "@/lib/hooks";
+import useEvent from "@/hooks/useEvent";
 import { useEffect } from "react";
 import { formatDateRange } from "@/lib/utils";
 

@@ -1,7 +1,7 @@
 import { fetchEvent, fetchEventSeats } from "@/lib/fetchers";
 import { useQuery } from "@tanstack/react-query";
 
-export function useEvent() {
+export default function useEvent() {
   const eventQuery = useQuery({
     queryKey: ["event"],
     queryFn: fetchEvent,
@@ -15,5 +15,7 @@ export function useEvent() {
     enabled: !!eventID,
   });
 
-  return { eventQuery, seatsQuery };
+  const currencyIso = eventQuery.data?.currencyIso || "";
+
+  return { eventQuery, seatsQuery, currencyIso };
 }
