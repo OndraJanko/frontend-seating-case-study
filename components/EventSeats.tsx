@@ -39,6 +39,7 @@ export default function EventSeats() {
   if (!data) {
     return <div>No seats available</div>;
   }
+
   const { sortedSeatRows, maxColumns } = processSeatRows(data);
 
   return (
@@ -51,7 +52,7 @@ export default function EventSeats() {
       />
       <Draggable position={position} onDrag={handleDrag} nodeRef={draggableRef}>
         <div
-          className="duration-300 ease-in-out first-letter:transition-transform"
+          className="transition-transform duration-300 ease-in-out"
           ref={draggableRef}
           style={{
             transformOrigin: "center",
