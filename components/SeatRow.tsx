@@ -9,9 +9,15 @@ type SeatRowProps = {
     seatRow: number;
   })[];
   maxColumns: number;
+  currencyIso: string;
 };
 
-export default function SeatRow({ row, seats, maxColumns }: SeatRowProps) {
+export default function SeatRow({
+  row,
+  seats,
+  maxColumns,
+  currencyIso,
+}: SeatRowProps) {
   const seatsWithGaps = Array.from({ length: maxColumns }, (_, index) => {
     const place = index + 1;
     const seat = seats.find((seat) => seat.place === place);
@@ -46,6 +52,7 @@ export default function SeatRow({ row, seats, maxColumns }: SeatRowProps) {
           seatRow={seat.seatRow}
           price={seat.price}
           ticketTypeName={seat.ticketTypeName}
+          currencyIso={currencyIso}
         />
       ))}
       <div className="flex h-10 w-10 items-center justify-center font-bold text-black">

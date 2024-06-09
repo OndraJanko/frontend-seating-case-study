@@ -3,7 +3,8 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import useEvent from "@/hooks/useEvent";
 import { useEffect } from "react";
-import { formatDateRange } from "@/lib/utils";
+import { formatDateRange } from "@/lib/dateUtils";
+import SkeletonEventDetails from "./skeletons/SkeletonEventDetails";
 
 export default function EventDetails() {
   const {
@@ -17,24 +18,29 @@ export default function EventDetails() {
   }, [data]);
 
   if (isLoading) {
+    return <SkeletonEventDetails />;
+  }
+
+  if (error) {
     return (
-      <div className="white_bg z-[1] flex h-full w-full flex-col rounded-md px-7 py-9">
-        <div className="mb-10 h-[200px] w-full max-w-[400px] rounded-md bg-black"></div>
-        <h2 className="mb-5">Loading</h2>
-        <p className="mb-5">Loading</p>
-        <Button variant="default" className="md:text-2xl">
-          Add to calendar
-        </Button>
+      <div className="white_bg z-[1] flex h-[400px] w-full flex-col items-center justify-center rounded-md px-2 py-4 md:px-3 md:py-5">
+        <div className="text-xl font-bold text-red-600">
+          Error loading event details
+        </div>
+        <p className="text-md text-gray-600">Please try again later.</p>
       </div>
     );
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
   if (!data) {
-    return <div>No data</div>;
+    return (
+      <div className="white_bg z-[1] flex h-[400px] w-full flex-col items-center justify-center rounded-md px-2 py-4 md:px-3 md:py-5">
+        <div className="text-xl font-bold text-gray-600">
+          No event details available
+        </div>
+        <p className="text-md text-gray-600">Please check back later.</p>
+      </div>
+    );
   }
 
   return (

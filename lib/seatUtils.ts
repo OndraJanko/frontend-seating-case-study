@@ -1,11 +1,13 @@
 import { Seat as SeatType } from "@/lib/types";
 
 export function processSeatRows(
-  data: (SeatType & {
-    price: number;
-    ticketTypeName: string;
-    seatRow: number;
-  })[],
+  data:
+    | (SeatType & {
+        price: number;
+        ticketTypeName: string;
+        seatRow: number;
+      })[]
+    | undefined,
 ) {
   const seatRows = data.reduce(
     (acc, seat) => {

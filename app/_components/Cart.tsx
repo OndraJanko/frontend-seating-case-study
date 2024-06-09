@@ -9,10 +9,12 @@ import {
 } from "@/components/ui/popover";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "@/store/cartSlice";
+import useEvent from "@/hooks/useEvent";
 
 export default function Cart() {
   const cartItems = useSelector((state: RootState) => state.cart.cart);
   const dispatch = useDispatch();
+  const { currencyIso } = useEvent();
 
   const handleRemoveFromCart = (itemId: string) => {
     dispatch(removeFromCart({ id: itemId }));
@@ -53,7 +55,9 @@ export default function Cart() {
             >
               <div className="flex w-full items-end justify-between gap-4">
                 <Label>{item.name}</Label>
-                <Label>{item.price} CZK</Label>
+                <Label>
+                  {item.price} {currencyIso}
+                </Label>
               </div>
               <Button
                 size="sm"

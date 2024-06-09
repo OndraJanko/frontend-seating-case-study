@@ -15,6 +15,7 @@ type SeatProps = {
   seatRow: number;
   price: number;
   ticketTypeName: string;
+  currencyIso: string;
 };
 
 export default function Seat({
@@ -23,6 +24,7 @@ export default function Seat({
   seatRow,
   price,
   ticketTypeName,
+  currencyIso,
 }: SeatProps) {
   const dispatch = useDispatch();
   const { cart: cartItems } = useSelector((state: RootState) => state.cart);
@@ -66,7 +68,9 @@ export default function Seat({
           <h4 className="font-semibold">Ticket: {ticketTypeName}</h4>
           <p>Row: {seatRow}</p>
           <p>Place: {place}</p>
-          <p>Price: {price} CZK</p>
+          <p>
+            Price: {price} {currencyIso}
+          </p>
         </div>
       </HoverCardContent>
     </HoverCard>

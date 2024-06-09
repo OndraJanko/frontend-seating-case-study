@@ -7,10 +7,13 @@ import { processSeatRows } from "@/lib/seatUtils";
 import SeatRow from "./SeatRow";
 import { useEffect } from "react";
 import { useRef } from "react";
+import SkeletonEventSeats from "./skeletons/SkeletonEventSeats";
 
 export default function EventSeats() {
   const {
     seatsQuery: { data, isLoading, error },
+    eventQuery: { isLoading: isEventLoading },
+    currencyIso,
   } = useEvent();
   const {
     zoomLevel,
@@ -46,21 +49,36 @@ export default function EventSeats() {
   }, [zoomLevel, divRef]);
 
   if (isLoading) {
-    return <div>Loading seats...</div>;
+    return <SkeletonEventSeats />;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className="white_bg z-[1] flex h-[400px] w-full flex-col items-center justify-center rounded-md px-2 py-4 md:px-3 md:py-5">
+        <div className="text-xl font-bold text-red-600">
+          Error loading event seats
+        </div>
+        <p className="text-md text-gray-600">Please try again later.</p>
+      </div>
+    );
   }
 
-  if (!data) {
-    return <div>No seats available</div>;
+  if (!data && !isEventLoading) {
+    return (
+      <div className="white_bg z-[1] flex h-[400px] w-full flex-col items-center justify-center rounded-md px-2 py-4 md:px-3 md:py-5">
+        <div className="text-xl font-bold text-gray-600">
+          No seats available
+        </div>
+        <p className="text-md text-gray-600">Please check back later.</p>
+      </div>
+    );
   }
+  if (!data) return <SkeletonEventSeats />;
 
   const { sortedSeatRows, maxColumns } = processSeatRows(data);
 
   return (
-    <div className="white_bg z-[1] flex flex-col items-center justify-center gap-2 overflow-auto rounded-md px-2 pt-[150px] md:px-3">
+    <div className="white_bg z-[1] flex flex-col items-center justify-center gap-2 overflow-auto rounded-md px-2 pt-[150px] md:px-3 md:pb-[70px]">
       <div className="absolute left-5 top-5 flex w-full flex-col justify-center">
         <SeatLegend seatTypes={seatTypes} />
         <SeatMapZoom
@@ -79,7 +97,13 @@ export default function EventSeats() {
         }}
       >
         {sortedSeatRows.map(({ row, seats }) => (
-          <SeatRow key={row} row={row} seats={seats} maxColumns={maxColumns} />
+          <SeatRow
+            key={row}
+            row={row}
+            seats={seats}
+            maxColumns={maxColumns}
+            currencyIso={currencyIso}
+          />
         ))}
       </div>
     </div>

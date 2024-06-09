@@ -21,7 +21,7 @@ function TicketInfo() {
 
 export default function TicketCheckout() {
   return (
-    <div className="white_bg flex flex-row items-center justify-between gap-2 rounded-md px-2 py-4 md:px-3 md:py-5">
+    <div className="white_bg flex flex-row items-center justify-between gap-2 rounded-md px-4 py-4 md:px-9 md:py-5">
       <TicketInfo />
       <Button variant="default" className="md:text-xl">
         Checkout
