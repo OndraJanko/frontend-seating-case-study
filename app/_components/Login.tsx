@@ -48,15 +48,22 @@ export default function Login() {
               {user.firstName} {user.lastName}
             </p>
             <h3 className="font-bold">Email</h3>
-            <p className="text-sm">{user.email}</p>
-            <div className="flex items-center justify-end">
-              <Button
-                variant="default"
-                onClick={handleLogout}
-                aria-label="Logout"
-              >
-                Logout
-              </Button>
+            <p className="mb-2 text-sm">{user.email}</p>
+            <div className="flex flex-row items-center justify-end gap-2">
+              <div className="flex items-center justify-end">
+                <Button variant="default" aria-label="Last Orders">
+                  Last Orders
+                </Button>
+              </div>
+              <div className="flex items-center justify-end">
+                <Button
+                  variant="default"
+                  onClick={handleLogout}
+                  aria-label="Logout"
+                >
+                  Logout
+                </Button>
+              </div>
             </div>
           </PopoverContent>
         </Popover>
