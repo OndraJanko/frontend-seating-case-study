@@ -1,15 +1,28 @@
+import currency from "currency.js";
+
 export default function formatCurrency(
   amount: number,
-  currency: string,
+  currencyCode: string = "USD",
 ): string {
-  const isInteger = Number.isInteger(amount);
+  let options = {};
 
-  const options: Intl.NumberFormatOptions = {
-    style: "currency",
-    currency: currency,
-    minimumFractionDigits: isInteger ? 0 : 2,
-    maximumFractionDigits: isInteger ? 0 : 2,
-  };
+  switch (currencyCode) {
+    case "CZK":
+      options = { symbol: "CZK ", decimal: ",", separator: " ", precision: 0 };
+      break;
+    case "EUR":
+      options = { symbol: "€ ", decimal: ",", separator: ".", precision: 2 };
+      break;
+    case "USD":
+      options = { symbol: "$ ", decimal: ".", separator: ",", precision: 2 };
+      break;
+    default:
+      console.error(
+        `Unsupported currency code: ${currencyCode}. Using 'USD' as fallback.`,
+      );
+      options = { symbol: "$ ", decimal: ".", separator: "," };
+      break;
+  }
 
-  return new Intl.NumberFormat("en-US", options).format(amount);
+  return currency(amount, options).format();
 }
