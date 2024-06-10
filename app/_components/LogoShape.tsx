@@ -2,13 +2,13 @@
 export default function LogoShape() {
   return (
     <svg
-      className="coolshapes misc-2"
       height="60"
       width="60"
       fill="none"
       viewBox="0 0 200 200"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <title>Logo Shape</title>
       <g clipPath="url(#cs_clip_1_misc-2)">
         <mask
           height="200"

@@ -52,7 +52,11 @@ export default function LoginDialog() {
             your order.
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid gap-4 py-4"
+          aria-live="polite"
+        >
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="email" className="text-right">
               Email
@@ -62,6 +66,7 @@ export default function LoginDialog() {
               className="col-span-3"
               type="email"
               {...register("email")}
+              required
             />
             {errors.email && (
               <p className="col-span-4 text-red-600">{errors.email?.message}</p>
@@ -76,6 +81,7 @@ export default function LoginDialog() {
               className="col-span-3"
               type="password"
               {...register("password")}
+              required
             />
             {errors.password && (
               <p className="col-span-4 text-red-600">
@@ -83,7 +89,7 @@ export default function LoginDialog() {
               </p>
             )}
             {loginError && (
-              <p className="col-span-4 text-center text-red-600">
+              <p className="col-span-4 text-center text-red-600" role="alert">
                 {loginError}
               </p>
             )}

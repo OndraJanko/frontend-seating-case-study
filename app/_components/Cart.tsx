@@ -10,7 +10,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, clearCart } from "@/store/cartSlice";
 import useEvent from "@/hooks/useEvent";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 export default function Cart() {
   const cartItems = useSelector((state: RootState) => state.cart.cart);
@@ -31,17 +31,26 @@ export default function Cart() {
     }
   }, [data, dispatch]);
 
+  const totalItems = useMemo(() => cartItems.length, [cartItems]);
+  const isEmpty = useMemo(() => totalItems === 0, [totalItems]);
+
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="default" className="px-2">
+        <Button
+          type="button"
+          variant="default"
+          className="px-2"
+          aria-label="Open Cart"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="h-6 w-6"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -59,32 +68,35 @@ export default function Cart() {
           </p>
         </div>
         <div className="grid gap-4 px-2 py-4">
-          {cartItems.length === 0 && (
+          {isEmpty && (
             <div>
               Oops! Your cart is empty. Find an exciting event and add some
               tickets to your cart!
             </div>
           )}
-          {cartItems.map((item) => (
-            <div
-              key={item.id}
-              className="flex items-center justify-between gap-3"
-            >
-              <div className="flex w-full items-end justify-between gap-4">
-                <Label>{item.name}</Label>
-                <Label>
-                  {item.price} {currencyIso}
-                </Label>
-              </div>
-              <Button
-                size="sm"
-                className="h-2 w-2 p-3"
-                onClick={() => handleRemoveFromCart(item.id)}
+          {!isEmpty &&
+            cartItems.map((item) => (
+              <div
+                key={item.id}
+                className="flex items-center justify-between gap-3"
               >
-                x
-              </Button>
-            </div>
-          ))}
+                <div className="flex w-full items-end justify-between gap-4">
+                  <Label>{item.name}</Label>
+                  <Label>
+                    {item.price} {currencyIso}
+                  </Label>
+                </div>
+                <Button
+                  type="button"
+                  size="sm"
+                  className="h-2 w-2 p-3"
+                  onClick={() => handleRemoveFromCart(item.id)}
+                  aria-label={`Remove ${item.name} from cart`}
+                >
+                  x
+                </Button>
+              </div>
+            ))}
         </div>
       </PopoverContent>
     </Popover>

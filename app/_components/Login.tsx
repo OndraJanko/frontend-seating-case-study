@@ -38,7 +38,7 @@ export default function Login() {
                 alt={`${user.firstName} ${user.lastName} profile picture`}
               />
               <AvatarFallback>
-                <AvatarSkeleton />
+                <AvatarSkeleton aria-label="Loading avatar" />
               </AvatarFallback>
             </Avatar>
           </PopoverTrigger>
@@ -50,7 +50,11 @@ export default function Login() {
             <h3 className="font-bold">Email</h3>
             <p className="text-sm">{user.email}</p>
             <div className="flex items-center justify-end">
-              <Button variant="default" onClick={handleLogout}>
+              <Button
+                variant="default"
+                onClick={handleLogout}
+                aria-label="Logout"
+              >
                 Logout
               </Button>
             </div>
