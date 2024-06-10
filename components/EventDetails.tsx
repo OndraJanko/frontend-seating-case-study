@@ -1,23 +1,14 @@
 "use client";
 import Image from "next/image";
 import useEvent from "@/hooks/useEvent";
-import { formatDateRange } from "@/lib/dateUtils";
 import EventDetailsSkeleton from "./skeletons/EventDetailsSkeleton";
 import AddToCalendar from "./AddToCalendar";
 import { CalendarEvent } from "calendar-link";
-import { useMemo } from "react";
 
 export default function EventDetails() {
   const {
     eventQuery: { data, isLoading, error },
   } = useEvent();
-
-  const formattedDateRange = useMemo(() => {
-    if (data?.dateFrom && data?.dateTo) {
-      return formatDateRange(data.dateFrom, data.dateTo);
-    }
-    return "N/A";
-  }, [data?.dateFrom, data?.dateTo]);
 
   if (isLoading) {
     return <EventDetailsSkeleton />;
@@ -74,7 +65,7 @@ export default function EventDetails() {
       </section>
       <section>
         <h2 className="text-lg font-bold">Date and Time</h2>
-        <p className="mb-5">{formattedDateRange}</p>
+        <p className="mb-5">{data.dateFrom + " - " + data.dateTo}</p>
       </section>
       <AddToCalendar event={event} />
     </div>
