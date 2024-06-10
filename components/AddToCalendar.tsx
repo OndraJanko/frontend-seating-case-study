@@ -31,7 +31,7 @@ export default function AddToCalendar({ event }: AddToCalendarProps) {
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
-        <Button variant="default" className="w-52 md:text-xl">
+        <Button variant="default" className="md:text-xl">
           Add to Calendar
         </Button>
       </PopoverTrigger>

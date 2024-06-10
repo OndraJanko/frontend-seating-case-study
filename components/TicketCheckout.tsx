@@ -2,7 +2,6 @@
 import { useSelector } from "react-redux";
 import useEvent from "@/hooks/useEvent";
 import TicketCheckoutSkeleton from "@/components/skeletons/TicketCheckoutSkeleton";
-import LoginDialog from "./dialogs/LoginDialog";
 import CheckoutDialog from "./dialogs/CheckoutDialog";
 import GuestCheckoutDialog from "./dialogs/GuestCheckoutDialog";
 
