@@ -71,9 +71,7 @@ export default function Seat({
           <h4 className="font-semibold">Ticket: {ticketTypeName}</h4>
           <p>Row: {seatRow}</p>
           <p>Place: {place}</p>
-          <p>
-            Price: {price} {currencyIso}
-          </p>
+          <p>Price: {formatCurrency(price, currencyIso)}</p>
         </div>
       </HoverCardContent>
     </HoverCard>

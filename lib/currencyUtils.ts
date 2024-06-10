@@ -17,10 +17,7 @@ export default function formatCurrency(
       options = { symbol: "$ ", decimal: ".", separator: ",", precision: 2 };
       break;
     default:
-      console.error(
-        `Unsupported currency code: ${currencyCode}. Using 'USD' as fallback.`,
-      );
-      options = { symbol: "$ ", decimal: ".", separator: "," };
+      options = { symbol: " ", decimal: ",", separator: " " };
       break;
   }
 
