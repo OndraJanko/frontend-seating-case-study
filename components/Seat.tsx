@@ -1,6 +1,6 @@
 "use client";
-import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems } from "@/lib/selectors";
 import { addToCart, removeFromCart } from "@/store/cartSlice";
 import { useMemo } from "react";
 import {
@@ -31,7 +31,7 @@ export default function Seat({
   seatId,
 }: SeatProps) {
   const dispatch = useDispatch();
-  const { cart: cartItems } = useSelector((state: RootState) => state.cart);
+  const cartItems = useSelector(selectCartItems);
   const isSelected = useMemo(
     () => cartItems.some((item) => item.id === id),
     [cartItems, id],

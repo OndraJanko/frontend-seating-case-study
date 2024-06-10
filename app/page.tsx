@@ -2,13 +2,7 @@ import TicketCheckout from "@/components/TicketCheckout";
 import EventDetails from "@/components/EventDetails";
 import EventSeats from "@/components/EventSeats";
 import Signature from "@/components/Signature";
-import { fetchEvent, fetchEventSeats } from "@/lib/fetchers";
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
-import { Event } from "@/lib/types";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Metadata } from "next";
 import { preFetchData } from "@/lib/fetchers";
 
@@ -27,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const { eventData, queryClient } = await preFetchData();
+  const { queryClient } = await preFetchData();
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

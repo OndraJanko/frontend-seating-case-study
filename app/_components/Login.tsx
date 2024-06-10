@@ -1,6 +1,5 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,10 +12,11 @@ import useAuth from "@/hooks/useAuth";
 import { useEffect } from "react";
 import { loadUserFromStorage } from "@/store/userSlice";
 import AvatarSkeleton from "@/components/skeletons/AvatarSkeleton";
+import { selectIsLoggedIn, selectUser } from "@/lib/selectors";
 
 export default function Login() {
-  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
-  const user = useSelector((state: RootState) => state.user.user);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const user = useSelector(selectUser);
   const { handleLogout } = useAuth();
   const dispatch = useDispatch();
 

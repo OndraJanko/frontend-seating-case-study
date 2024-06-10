@@ -1,5 +1,4 @@
 "use client";
-import { RootState } from "@/store/store";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import {
@@ -10,10 +9,12 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, clearCart } from "@/store/cartSlice";
 import useEvent from "@/hooks/useEvent";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
+import { selectCartItems, selectIsCartEmpty } from "@/lib/selectors";
 
 export default function Cart() {
-  const cartItems = useSelector((state: RootState) => state.cart.cart);
+  const cartItems = useSelector(selectCartItems);
+  const isEmpty = useSelector(selectIsCartEmpty);
   const dispatch = useDispatch();
   const {
     currencyIso,
@@ -30,9 +31,6 @@ export default function Cart() {
       dispatch(clearCart());
     }
   }, [data, dispatch]);
-
-  const totalItems = useMemo(() => cartItems.length, [cartItems]);
-  const isEmpty = useMemo(() => totalItems === 0, [totalItems]);
 
   return (
     <Popover>

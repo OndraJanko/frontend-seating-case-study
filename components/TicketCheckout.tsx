@@ -1,14 +1,18 @@
 "use client";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 import useEvent from "@/hooks/useEvent";
 import TicketCheckoutSkeleton from "@/components/skeletons/TicketCheckoutSkeleton";
 import LoginDialog from "./dialogs/LoginDialog";
 import CheckoutDialog from "./dialogs/CheckoutDialog";
+import {
+  selectTotalItems,
+  selectTotalPrice,
+  selectIsLoggedIn,
+} from "@/lib/selectors";
 
 function TicketInfo() {
-  const totalItems = useSelector((state: RootState) => state.cart.totalAmount);
-  const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
+  const totalItems = useSelector(selectTotalItems);
+  const totalPrice = useSelector(selectTotalPrice);
   const { currencyIso } = useEvent();
 
   return (
@@ -25,7 +29,7 @@ export default function TicketCheckout() {
   const {
     eventQuery: { isLoading },
   } = useEvent();
-  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   if (isLoading) {
     return <TicketCheckoutSkeleton />;
