@@ -66,7 +66,7 @@ export default function EventDetails() {
       </section>
       <section>
         <h2 className="text-lg font-bold">Date and Time</h2>
-        <p className="mb-5">{formatDateRange(data.dateFrom, data.dateTo)}</p>
+        {/* <p className="mb-5">{formatDateRange(data.dateFrom, data.dateTo)}</p> */}
       </section>
       {/* <AddToCalendar event={event} /> */}
     </div>
