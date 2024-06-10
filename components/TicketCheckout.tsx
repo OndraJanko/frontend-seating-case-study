@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import useEvent from "@/hooks/useEvent";
+import TicketCheckoutSkeleton from "@/components/skeletons/TicketCheckoutSkeleton";
 
 function TicketInfo() {
   const totalItems = useSelector((state: RootState) => state.cart.totalAmount);
@@ -20,6 +21,14 @@ function TicketInfo() {
 }
 
 export default function TicketCheckout() {
+  const {
+    eventQuery: { isLoading },
+  } = useEvent();
+
+  if (isLoading) {
+    return <TicketCheckoutSkeleton />;
+  }
+
   return (
     <div className="white_bg flex flex-row items-center justify-between gap-2 rounded-md px-4 py-4 md:px-9 md:py-5">
       <TicketInfo />

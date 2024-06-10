@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 export default function Signature() {
   return (
     <h3 className="text-sm">
@@ -7,8 +8,8 @@ export default function Signature() {
         className="font-bold"
         href="https://ondrajanko.xyz"
         target="_blank"
-        rel="noreferrer"
-        aria-description="Ondra Janko"
+        rel="noopener noreferrer"
+        aria-label="Ondra Janko's personal website"
       >
         Ondra Janko
       </Link>

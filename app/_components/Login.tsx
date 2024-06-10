@@ -12,6 +12,7 @@ import LoginDialog from "./LoginDialog";
 import useAuth from "@/hooks/useAuth";
 import { useEffect } from "react";
 import { loadUserFromStorage } from "@/store/userSlice";
+import AvatarSkeleton from "@/components/skeletons/AvatarSkeleton";
 
 export default function Login() {
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -34,9 +35,11 @@ export default function Login() {
             <Avatar className="cursor-pointer">
               <AvatarImage
                 src={userProfilePictureUrl}
-                alt="user avatar image"
+                alt={`${user.firstName} ${user.lastName} profile picture`}
               />
-              <AvatarFallback>avatar</AvatarFallback>
+              <AvatarFallback>
+                <AvatarSkeleton />
+              </AvatarFallback>
             </Avatar>
           </PopoverTrigger>
           <PopoverContent className="max-h-[300px] w-80 max-w-[300px] overflow-auto">

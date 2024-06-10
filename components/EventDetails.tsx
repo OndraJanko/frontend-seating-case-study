@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import useEvent from "@/hooks/useEvent";
 import { useEffect } from "react";
 import { formatDateRange } from "@/lib/dateUtils";
-import SkeletonEventDetails from "./skeletons/SkeletonEventDetails";
+import EventDetailsSkeleton from "./skeletons/EventDetailsSkeleton";
 
 export default function EventDetails() {
   const {
@@ -18,7 +18,7 @@ export default function EventDetails() {
   }, [data]);
 
   if (isLoading) {
-    return <SkeletonEventDetails />;
+    return <EventDetailsSkeleton />;
   }
 
   if (error) {

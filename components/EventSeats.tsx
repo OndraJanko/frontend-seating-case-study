@@ -7,7 +7,7 @@ import { processSeatRows } from "@/lib/seatUtils";
 import SeatRow from "./SeatRow";
 import { useEffect } from "react";
 import { useRef } from "react";
-import SkeletonEventSeats from "./skeletons/SkeletonEventSeats";
+import EventSeatsSkeleton from "./skeletons/EventSeatsSkeleton";
 
 export default function EventSeats() {
   const {
@@ -49,7 +49,7 @@ export default function EventSeats() {
   }, [zoomLevel, divRef]);
 
   if (isLoading) {
-    return <SkeletonEventSeats />;
+    return <EventSeatsSkeleton />;
   }
 
   if (error) {
@@ -73,7 +73,7 @@ export default function EventSeats() {
       </div>
     );
   }
-  if (!data) return <SkeletonEventSeats />;
+  if (!data) return <EventSeatsSkeleton />;
 
   const { sortedSeatRows, maxColumns } = processSeatRows(data);
 
