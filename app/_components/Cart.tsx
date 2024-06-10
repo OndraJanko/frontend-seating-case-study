@@ -60,13 +60,13 @@ export default function Cart() {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="max-h-[300px] w-80 overflow-auto px-0 pt-0">
-        <div className="sticky top-0 space-y-2 border-b border-gray-200 bg-white px-2 py-4">
+        <div className="sticky top-0 space-y-1 border-b border-gray-200 bg-white px-4 py-5">
           <h4 className="font-medium leading-none">Cart</h4>
           <p className="text-sm text-muted-foreground">
             Here you can see your order.
           </p>
         </div>
-        <div className="grid gap-4 px-2 py-4">
+        <div className="grid gap-4 px-4 py-5">
           {isEmpty && (
             <div>
               Oops! Your cart is empty. Find an exciting event and add some
