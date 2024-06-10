@@ -17,6 +17,7 @@ export async function fetchEvent(): Promise<Event> {
     throw new Error("API_URL is not set");
   }
   const { data } = await axios.get<Event>(`${apiUrl}/event`);
+
   return data;
 }
 export async function fetchEventSeats(
@@ -30,7 +31,6 @@ export async function fetchEventSeats(
     `${apiUrl}/event-tickets?eventId=${eventId}`,
   );
 
-  console.log(data);
   const { ticketTypes, seatRows } = data;
 
   // Map of ticketTypeId to Ticket

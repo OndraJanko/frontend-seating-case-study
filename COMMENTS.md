@@ -11,3 +11,7 @@ I used Axios to make API calls to the backend and utilized Zod to validate the d
 ## Seat Map
 
 I used the useZoom hook from the @/hooks/useZoom.ts file to manage the zoom level of the seat map. The handleZoomIn, handleZoomOut, and handleResetZoom functions update the zoom level based on user interactions with the seat map.
+
+## Prefetching
+
+In this project, I used ReactQuery's prefetching capabilities to fetch data on the server side before rendering components.
