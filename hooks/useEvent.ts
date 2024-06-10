@@ -6,6 +6,7 @@ export default function useEvent() {
   const eventQuery = useQuery<Event>({
     queryKey: ["event"],
     queryFn: fetchEvent,
+    staleTime: 60 * 1000,
   });
 
   const eventID = eventQuery.data?.eventId;
