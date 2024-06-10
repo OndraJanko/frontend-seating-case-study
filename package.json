@@ -22,7 +22,6 @@
     "@types/uuid": "^9.0.8",
     "@vercel/speed-insights": "^1.0.11",
     "axios": "^1.7.2",
-    "calendar-link": "^2.6.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "currency.js": "^2.0.4",

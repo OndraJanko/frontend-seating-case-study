@@ -3,8 +3,8 @@ import Image from "next/image";
 import useEvent from "@/hooks/useEvent";
 import { formatDateRange } from "@/lib/dateUtils";
 import EventDetailsSkeleton from "./skeletons/EventDetailsSkeleton";
-import AddToCalendar from "./AddToCalendar";
-import { CalendarEvent } from "calendar-link";
+// import AddToCalendar from "./AddToCalendar";
+// import { CalendarEvent } from "calendar-link";
 
 export default function EventDetails() {
   const {
@@ -37,13 +37,13 @@ export default function EventDetails() {
     );
   }
 
-  const event: CalendarEvent = {
-    title: data.namePub,
-    description: data.description,
-    location: data.place,
-    start: new Date(data.dateFrom).toISOString(),
-    end: new Date(data.dateTo).toISOString(),
-  };
+  // const event: CalendarEvent = {
+  //   title: data.namePub,
+  //   description: data.description,
+  //   location: data.place,
+  //   start: new Date(data.dateFrom).toISOString(),
+  //   end: new Date(data.dateTo).toISOString(),
+  // };
 
   return (
     <div className="white_bg z-[1] flex h-full w-full flex-col rounded-md px-2 py-4 md:px-3 md:py-5">
@@ -68,7 +68,7 @@ export default function EventDetails() {
         <h2 className="text-lg font-bold">Date and Time</h2>
         <p className="mb-5">{formatDateRange(data.dateFrom, data.dateTo)}</p>
       </section>
-      <AddToCalendar event={event} />
+      {/* <AddToCalendar event={event} /> */}
     </div>
   );
 }
