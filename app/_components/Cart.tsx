@@ -11,6 +11,7 @@ import { removeFromCart, clearCart } from "@/store/cartSlice";
 import useEvent from "@/hooks/useEvent";
 import { useEffect } from "react";
 import { selectCartItems, selectIsCartEmpty } from "@/lib/selectors";
+import formatCurrency from "@/lib/currencyUtils";
 
 export default function Cart() {
   const cartItems = useSelector(selectCartItems);
@@ -80,9 +81,7 @@ export default function Cart() {
               >
                 <div className="flex w-full items-end justify-between gap-4">
                   <Label>{item.name}</Label>
-                  <Label>
-                    {item.price} {currencyIso}
-                  </Label>
+                  <Label>{formatCurrency(item.price, currencyIso)}</Label>
                 </div>
                 <Button
                   type="button"

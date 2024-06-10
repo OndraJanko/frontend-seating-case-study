@@ -15,6 +15,7 @@ import useEvent from "@/hooks/useEvent";
 import { useToast } from "@/components/ui/use-toast";
 import { clearCart } from "@/store/cartSlice";
 import { selectCheckoutData } from "@/lib/selectors";
+import formatCurrency from "@/lib/currencyUtils";
 
 type TicketSummary = {
   [key: string]: { name: string; count: number; totalCost: number };
@@ -89,13 +90,13 @@ export default function CheckoutDialog() {
               ? "No tickets in your cart"
               : Object.values(ticketSummary).map((ticket) => (
                   <div key={ticket.name}>
-                    {ticket.count}x {ticket.name} - {ticket.totalCost}{" "}
-                    {event?.currencyIso ?? ""}
+                    {ticket.count}x {ticket.name} -{" "}
+                    {formatCurrency(ticket.totalCost, event?.currencyIso ?? "")}
                   </div>
                 ))}
           </div>
           <div className="text-xl font-bold">
-            {totalPrice} {event?.currencyIso ?? ""}
+            {formatCurrency(totalPrice, event?.currencyIso ?? "")}
           </div>
           <DialogFooter>
             <Button
