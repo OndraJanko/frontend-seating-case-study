@@ -1,23 +1,15 @@
 export default function formatCurrency(
   amount: number,
-  currency: string = "USD",
+  currency: string,
 ): string {
-  try {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: currency,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2,
-    }).format(amount);
-  } catch (e) {
-    console.error(
-      `Invalid currency code: ${currency}. Using 'USD' as fallback.`,
-    );
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2,
-    }).format(amount);
-  }
+  const isInteger = Number.isInteger(amount);
+
+  const options: Intl.NumberFormatOptions = {
+    style: "currency",
+    currency: currency,
+    minimumFractionDigits: isInteger ? 0 : 2,
+    maximumFractionDigits: isInteger ? 0 : 2,
+  };
+
+  return new Intl.NumberFormat("en-US", options).format(amount);
 }
