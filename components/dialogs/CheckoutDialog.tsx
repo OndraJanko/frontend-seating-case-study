@@ -11,10 +11,10 @@ import {
   DialogHeader,
 } from "@/components/ui/dialog";
 import useOrder from "@/hooks/useOrder";
-import { RootState } from "@/store/store";
 import useEvent from "@/hooks/useEvent";
 import { useToast } from "@/components/ui/use-toast";
 import { clearCart } from "@/store/cartSlice";
+import { selectCheckoutData } from "@/lib/selectors";
 
 type TicketSummary = {
   [key: string]: { name: string; count: number; totalCost: number };
@@ -38,11 +38,7 @@ export default function CheckoutDialog() {
 
   const { data: event } = useEvent().eventQuery;
 
-  const { totalPrice, cartItems, user } = useSelector((state: RootState) => ({
-    totalPrice: state.cart.totalPrice,
-    cartItems: state.cart.cart,
-    user: state.user.user,
-  }));
+  const { totalPrice, cartItems, user } = useSelector(selectCheckoutData);
 
   const handlePlaceOrder = useCallback(() => {
     if (!event || !user || cartItems.length === 0) return;

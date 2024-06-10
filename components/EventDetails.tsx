@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import useEvent from "@/hooks/useEvent";
-import { useEffect } from "react";
 import { formatDateRange } from "@/lib/dateUtils";
 import EventDetailsSkeleton from "./skeletons/EventDetailsSkeleton";
 
@@ -10,12 +9,6 @@ export default function EventDetails() {
   const {
     eventQuery: { data, isLoading, error },
   } = useEvent();
-
-  useEffect(() => {
-    if (data) {
-      document.title = `Event Seating App - ${data.namePub}`;
-    }
-  }, [data]);
 
   if (isLoading) {
     return <EventDetailsSkeleton />;

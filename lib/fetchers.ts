@@ -6,8 +6,8 @@ import {
   SeatRow,
   ProcessedSeat,
 } from "@/lib/types";
+import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
-
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchEvent(): Promise<Event> {
@@ -48,4 +48,20 @@ export async function fetchEventSeats(
   );
 
   return processedSeats;
+}
+
+export async function preFetchData() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({ queryKey: ["event"], queryFn: fetchEvent });
+
+  const eventData = queryClient.getQueryData<Event>(["event"]);
+
+  if (eventData && eventData.eventId) {
+    await queryClient.prefetchQuery({
+      queryKey: ["seats", eventData.eventId],
+      queryFn: () => fetchEventSeats(eventData.eventId),
+    });
+  }
+
+  return { eventData, queryClient };
 }

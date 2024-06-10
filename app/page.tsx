@@ -9,19 +9,25 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { Event } from "@/lib/types";
+import { Metadata } from "next";
+import { preFetchData } from "@/lib/fetchers";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { eventData } = await preFetchData();
+
+  return {
+    title: eventData
+      ? "Event Seating App " + eventData.namePub
+      : "Event Seating App",
+    description:
+      eventData?.description ||
+      "Easily purchase tickets for your favorite events with our seating map. Choose your seats and buy tickets securely online.",
+    keywords: "event tickets, buy tickets, seating map, online ticket purchase",
+  };
+}
 
 export default async function Home() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({ queryKey: ["event"], queryFn: fetchEvent });
-
-  const eventData = queryClient.getQueryData<Event>(["event"]);
-
-  if (eventData && eventData.eventId) {
-    await queryClient.prefetchQuery({
-      queryKey: ["seats", eventData.eventId],
-      queryFn: () => fetchEventSeats(eventData.eventId),
-    });
-  }
+  const { eventData, queryClient } = await preFetchData();
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
