@@ -23,7 +23,6 @@ function TicketInfo() {
       <div className="text-md">Total for {totalItems} tickets</div>
       <div className="text-xl font-bold">
         {formatCurrency(totalPrice, currencyIso)}
-        {totalPrice} {currencyIso}
       </div>
     </div>
   );

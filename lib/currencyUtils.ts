@@ -17,7 +17,7 @@ export default function formatCurrency(
       options = { symbol: "$ ", decimal: ".", separator: ",", precision: 2 };
       break;
     default:
-      options = { symbol: " ", decimal: ",", separator: " " };
+      options = { symbol: " ", decimal: ",", separator: " ", precision: 2 };
       break;
   }
 
