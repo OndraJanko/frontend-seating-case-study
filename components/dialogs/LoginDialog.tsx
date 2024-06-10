@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoginFormInputs, loginSchema } from "@/lib/validationSchemas";
 import useAuth from "@/hooks/useAuth";
+import { useCallback } from "react";
 
 type LoginDialogProps = {
   buttonText: string;
@@ -33,12 +34,15 @@ export default function LoginDialog({ buttonText }: LoginDialogProps) {
     loginMutation.mutate(data);
   };
 
-  const handleDialogClose = (open: boolean) => {
-    if (!open) {
-      reset();
-      resetLoginError();
-    }
-  };
+  const handleDialogClose = useCallback(
+    (open: boolean) => {
+      if (!open) {
+        reset();
+        resetLoginError();
+      }
+    },
+    [reset, resetLoginError],
+  );
 
   return (
     <Dialog onOpenChange={handleDialogClose}>
@@ -98,7 +102,9 @@ export default function LoginDialog({ buttonText }: LoginDialogProps) {
             )}
           </div>
           <DialogFooter>
-            <Button type="submit">Login</Button>
+            <Button type="submit" disabled={loginMutation.isPending}>
+              {loginMutation.isPending ? "Processing..." : "Login"}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

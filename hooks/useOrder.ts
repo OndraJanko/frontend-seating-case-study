@@ -1,4 +1,8 @@
-import { useMutation, UseMutationResult } from "@tanstack/react-query";
+import {
+  useMutation,
+  UseMutationResult,
+  useQueryClient,
+} from "@tanstack/react-query";
 import axios, { AxiosResponse } from "axios";
 import { OrderResponse, OrderRequest } from "@/lib/types";
 
@@ -6,6 +10,8 @@ export default function useOrder(
   onSuccessCallback: (response: string) => void,
   onErrorCallback: (error: string) => void,
 ) {
+  const queryClient = useQueryClient();
+
   async function createOrder(
     data: OrderRequest,
   ): Promise<AxiosResponse<OrderResponse>> {
@@ -26,6 +32,8 @@ export default function useOrder(
     mutationFn: createOrder,
     onSuccess: (response) => {
       onSuccessCallback(response.data.message);
+      queryClient.invalidateQueries({ queryKey: ["event"] });
+      queryClient.invalidateQueries({ queryKey: ["seats"] });
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
