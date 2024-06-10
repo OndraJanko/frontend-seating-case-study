@@ -22,7 +22,7 @@ function TicketInfo() {
     <div className="flex flex-col items-start justify-center gap-2">
       <div className="text-md">Total for {totalItems} tickets</div>
       <div className="text-xl font-bold">
-        {formatCurrency(totalPrice, currencyIso)}
+        {totalPrice} {currencyIso}
       </div>
     </div>
   );

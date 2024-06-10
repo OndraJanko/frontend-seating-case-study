@@ -90,13 +90,13 @@ export default function CheckoutDialog() {
               ? "No tickets in your cart"
               : Object.values(ticketSummary).map((ticket) => (
                   <div key={ticket.name}>
-                    {ticket.count}x {ticket.name} -{" "}
-                    {formatCurrency(ticket.totalCost, event?.currencyIso ?? "")}
+                    {ticket.count}x {ticket.name} - {ticket.totalCost}{" "}
+                    {event?.currencyIso ?? ""}
                   </div>
                 ))}
           </div>
           <div className="text-xl font-bold">
-            {formatCurrency(totalPrice, event?.currencyIso ?? "")}
+            {totalPrice} {event?.currencyIso ?? ""}
           </div>
           <DialogFooter>
             <Button

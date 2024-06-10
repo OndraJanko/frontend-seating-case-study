@@ -81,7 +81,9 @@ export default function Cart() {
               >
                 <div className="flex w-full items-end justify-between gap-4">
                   <Label>{item.name}</Label>
-                  <Label>{formatCurrency(item.price, currencyIso)}</Label>
+                  <Label>
+                    {item.price} {currencyIso}
+                  </Label>
                 </div>
                 <Button
                   type="button"
