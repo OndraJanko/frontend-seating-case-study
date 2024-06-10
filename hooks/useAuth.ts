@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { setUser, clearUser } from "@/store/userSlice";
-import { fetchUser } from "@/lib/fetchers";
 import { LoginResponse } from "@/lib/types";
 import { LoginFormInputs } from "@/lib/validationSchemas";
 import axios, { AxiosResponse } from "axios";
@@ -11,6 +10,14 @@ export default function useAuth() {
   const dispatch = useDispatch();
   const [loginError, setLoginError] = useState<string | null>(null);
 
+  async function fetchUser(
+    data: LoginFormInputs,
+  ): Promise<AxiosResponse<LoginResponse>> {
+    return axios.post<LoginResponse>(
+      `${process.env.NEXT_PUBLIC_API_URL}/login`,
+      data,
+    );
+  }
   const loginMutation: UseMutationResult<
     AxiosResponse<LoginResponse>,
     unknown,
@@ -27,17 +34,16 @@ export default function useAuth() {
       } else {
         setLoginError("Unknown error, try again later");
       }
-      console.error("Login error:", error);
     },
   });
 
-  const handleLogout = () => {
+  function handleLogout() {
     dispatch(clearUser());
-  };
+  }
 
-  const resetLoginError = () => {
+  function resetLoginError() {
     setLoginError(null);
-  };
+  }
 
   return { loginMutation, handleLogout, loginError, resetLoginError };
 }

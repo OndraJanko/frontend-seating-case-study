@@ -1,13 +1,9 @@
 import Seat from "./Seat";
-import { Seat as SeatType } from "@/lib/types";
+import { ProcessedSeat } from "@/lib/types";
 
 type SeatRowProps = {
   row: number;
-  seats: (SeatType & {
-    price: number;
-    ticketTypeName: string;
-    seatRow: number;
-  })[];
+  seats: ProcessedSeat[];
   maxColumns: number;
   currencyIso: string;
 };
@@ -29,6 +25,7 @@ export default function SeatRow({
           seatRow: row,
           price: 0,
           ticketTypeName: "Taken",
+          ticketTypeId: "",
         };
   });
   return (
@@ -53,6 +50,8 @@ export default function SeatRow({
           price={seat.price}
           ticketTypeName={seat.ticketTypeName}
           currencyIso={currencyIso}
+          ticketTypeId={seat.ticketTypeId}
+          seatId={seat.seatId}
         />
       ))}
       <div className="flex h-10 w-10 items-center justify-center font-bold text-black">

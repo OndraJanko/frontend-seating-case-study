@@ -6,6 +6,7 @@ import Header from "./_components/Header";
 import { ReactNode } from "react";
 import QueryProvider from "./_components/queryprovider";
 import ReduxProvider from "./_components/reduxprovider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ReduxProvider>
             <Header />
             {children}
+            <Toaster />
             <SpeedInsights />
           </ReduxProvider>
         </QueryProvider>

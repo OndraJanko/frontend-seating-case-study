@@ -15,7 +15,10 @@ import { Label } from "@/components/ui/label";
 import { LoginFormInputs, loginSchema } from "@/lib/validationSchemas";
 import useAuth from "@/hooks/useAuth";
 
-export default function LoginDialog() {
+type LoginDialogProps = {
+  buttonText: string;
+};
+export default function LoginDialog({ buttonText }: LoginDialogProps) {
   const { loginMutation, loginError, resetLoginError } = useAuth();
   const {
     register,
@@ -41,7 +44,7 @@ export default function LoginDialog() {
     <Dialog onOpenChange={handleDialogClose}>
       <DialogTrigger asChild>
         <Button variant="default" className="md:text-xl">
-          Login
+          {buttonText}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

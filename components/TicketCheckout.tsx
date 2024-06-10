@@ -1,9 +1,10 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import useEvent from "@/hooks/useEvent";
 import TicketCheckoutSkeleton from "@/components/skeletons/TicketCheckoutSkeleton";
+import LoginDialog from "./dialogs/LoginDialog";
+import CheckoutDialog from "./dialogs/CheckoutDialog";
 
 function TicketInfo() {
   const totalItems = useSelector((state: RootState) => state.cart.totalAmount);
@@ -24,6 +25,7 @@ export default function TicketCheckout() {
   const {
     eventQuery: { isLoading },
   } = useEvent();
+  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
 
   if (isLoading) {
     return <TicketCheckoutSkeleton />;
@@ -32,9 +34,7 @@ export default function TicketCheckout() {
   return (
     <div className="white_bg flex flex-row items-center justify-between gap-2 rounded-md px-4 py-4 md:px-9 md:py-5">
       <TicketInfo />
-      <Button variant="default" className="md:text-xl">
-        Checkout
-      </Button>
+      {isLoggedIn ? <CheckoutDialog /> : <LoginDialog buttonText="Checkout" />}
     </div>
   );
 }

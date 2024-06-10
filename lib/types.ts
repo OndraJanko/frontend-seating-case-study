@@ -11,10 +11,17 @@ type Event = {
   place: string;
 };
 
-type Ticket = {
+type TicketResponse = {
   id: UUID;
   name: string;
   price: number;
+};
+type Ticket = {
+  id: UUID;
+  price: number;
+  ticketTypeId: UUID;
+  seatId: string;
+  name: string;
 };
 
 type Seat = {
@@ -29,7 +36,7 @@ type SeatRow = {
 };
 
 type EventTicketsResponse = {
-  ticketTypes: Ticket[];
+  ticketTypes: TicketResponse[];
   seatRows: SeatRow[];
 };
 
@@ -73,7 +80,7 @@ type OrderResponse = {
 type ProcessedSeat = {
   seatId: UUID;
   place: number;
-  ticketTypeId: string;
+  ticketTypeId: UUID;
   price: number;
   ticketTypeName: string;
   seatRow: number;
@@ -86,6 +93,7 @@ export type {
   Seat,
   SeatRow,
   EventTicketsResponse,
+  TicketResponse,
   User,
   LoginResponse,
   OrderRequest,

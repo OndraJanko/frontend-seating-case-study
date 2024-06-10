@@ -16,6 +16,8 @@ type SeatProps = {
   price: number;
   ticketTypeName: string;
   currencyIso: string;
+  ticketTypeId: string;
+  seatId: string;
 };
 
 export default function Seat({
@@ -25,6 +27,8 @@ export default function Seat({
   price,
   ticketTypeName,
   currencyIso,
+  ticketTypeId,
+  seatId,
 }: SeatProps) {
   const dispatch = useDispatch();
   const { cart: cartItems } = useSelector((state: RootState) => state.cart);
@@ -34,7 +38,7 @@ export default function Seat({
   );
 
   const handleSeatClick = () => {
-    const seat = { id, name: ticketTypeName, price };
+    const seat = { id, ticketTypeId, seatId, price, name: ticketTypeName };
     const action = isSelected ? removeFromCart({ id }) : addToCart(seat);
     dispatch(action);
   };
@@ -47,8 +51,8 @@ export default function Seat({
           ? "bg-black text-white"
           : ticketTypeName === "VIP ticket"
             ? isSelected
-              ? "border-2 border-black bg-yellow-400"
-              : "bg-yellow-200 hover:bg-yellow-300"
+              ? "cursor-pointer border-2 border-black bg-yellow-400"
+              : "cursor-pointer bg-yellow-200 hover:bg-yellow-300"
             : isSelected
               ? "cursor-pointer border-2 border-black bg-zinc-200"
               : "cursor-pointer bg-zinc-100 hover:bg-zinc-200"

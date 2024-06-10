@@ -8,7 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import LoginDialog from "./LoginDialog";
+import LoginDialog from "../../components/dialogs/LoginDialog";
 import useAuth from "@/hooks/useAuth";
 import { useEffect } from "react";
 import { loadUserFromStorage } from "@/store/userSlice";
@@ -61,7 +61,7 @@ export default function Login() {
           </PopoverContent>
         </Popover>
       ) : (
-        <LoginDialog />
+        <LoginDialog buttonText="Login" />
       )}
     </div>
   );

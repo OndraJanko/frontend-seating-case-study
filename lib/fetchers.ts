@@ -2,13 +2,11 @@ import {
   Event,
   EventTicketsResponse,
   Seat,
-  Ticket,
+  TicketResponse,
   SeatRow,
   ProcessedSeat,
-  LoginResponse,
 } from "@/lib/types";
-import axios, { AxiosResponse } from "axios";
-import { LoginFormInputs } from "./validationSchemas";
+import axios from "axios";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -17,9 +15,9 @@ export async function fetchEvent(): Promise<Event> {
     throw new Error("API_URL is not set");
   }
   const { data } = await axios.get<Event>(`${apiUrl}/event`);
-
   return data;
 }
+
 export async function fetchEventSeats(
   eventId: string,
 ): Promise<ProcessedSeat[]> {
@@ -33,8 +31,8 @@ export async function fetchEventSeats(
 
   const { ticketTypes, seatRows } = data;
 
-  // Map of ticketTypeId to Ticket
-  const ticketTypeMap: Record<string, Ticket> = {};
+  // Map of ticketTypeId to TicketResponse
+  const ticketTypeMap: Record<string, TicketResponse> = {};
   ticketTypes.forEach((ticketType) => {
     ticketTypeMap[ticketType.id] = ticketType;
   });
@@ -50,10 +48,4 @@ export async function fetchEventSeats(
   );
 
   return processedSeats;
-}
-
-export async function fetchUser(
-  data: LoginFormInputs,
-): Promise<AxiosResponse<LoginResponse>> {
-  return axios.post<LoginResponse>(`${apiUrl}/login`, data);
 }
