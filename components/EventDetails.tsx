@@ -4,6 +4,7 @@ import useEvent from "@/hooks/useEvent";
 import EventDetailsSkeleton from "./skeletons/EventDetailsSkeleton";
 import AddToCalendar from "./AddToCalendar";
 import { CalendarEvent } from "calendar-link";
+import { formatDateRange } from "@/lib/dateUtils";
 
 export default function EventDetails() {
   const {
@@ -65,7 +66,9 @@ export default function EventDetails() {
       </section>
       <section>
         <h2 className="text-lg font-bold">Date and Time</h2>
-        <p className="mb-5">{data.dateFrom + " - " + data.dateTo}</p>
+        <p className="mb-5" suppressHydrationWarning>
+          {formatDateRange(data.dateFrom, data.dateTo)}
+        </p>
       </section>
       <AddToCalendar event={event} />
     </div>
