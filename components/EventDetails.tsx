@@ -37,13 +37,13 @@ export default function EventDetails() {
     );
   }
 
-  // const event: CalendarEvent = {
-  //   title: data.namePub,
-  //   description: data.description,
-  //   location: data.place,
-  //   start: new Date(data.dateFrom).toISOString(),
-  //   end: new Date(data.dateTo).toISOString(),
-  // };
+  const event: CalendarEvent = {
+    title: data.namePub,
+    description: data.description,
+    location: data.place,
+    start: new Date(data.dateFrom).toISOString(),
+    end: new Date(data.dateTo).toISOString(),
+  };
 
   return (
     <div className="white_bg z-[1] flex h-full w-full flex-col rounded-md px-2 py-4 md:px-3 md:py-5">
