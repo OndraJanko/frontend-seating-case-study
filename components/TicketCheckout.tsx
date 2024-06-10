@@ -4,6 +4,8 @@ import useEvent from "@/hooks/useEvent";
 import TicketCheckoutSkeleton from "@/components/skeletons/TicketCheckoutSkeleton";
 import LoginDialog from "./dialogs/LoginDialog";
 import CheckoutDialog from "./dialogs/CheckoutDialog";
+import GuestCheckoutDialog from "./dialogs/GuestCheckoutDialog";
+
 import {
   selectTotalItems,
   selectTotalPrice,
@@ -39,7 +41,7 @@ export default function TicketCheckout() {
   return (
     <div className="white_bg flex flex-row items-center justify-between gap-2 rounded-md px-4 py-4 md:px-9 md:py-5">
       <TicketInfo />
-      {isLoggedIn ? <CheckoutDialog /> : <LoginDialog buttonText="Checkout" />}
+      {isLoggedIn ? <CheckoutDialog /> : <GuestCheckoutDialog />}
     </div>
   );
 }
