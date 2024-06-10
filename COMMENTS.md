@@ -1,5 +1,18 @@
 Documentation, comments and other information about the project
 
+## Used Technologies
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Zod
+- Tanstack Query
+- Axios
+- Redux
+- Shadcn/ui
+- React Hook Form
+
 ## User Auth
 
 I chose local storage for user sessions to keep the project simple and focused on frontend development, avoiding unnecessary backend complexity.

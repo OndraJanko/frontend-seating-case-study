@@ -45,6 +45,7 @@ export default function EventDetails() {
         width={500}
         height={200}
         className="mb-3 rounded-md"
+        priority
       />
       <section>
         <h2 className="text-lg font-bold">About</h2>
