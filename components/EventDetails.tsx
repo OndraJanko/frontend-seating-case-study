@@ -55,6 +55,7 @@ export default function EventDetails() {
         height={200}
         className="mb-3 rounded-md"
         priority
+        style={{ width: "auto", height: "auto" }}
       />
       <section>
         <h2 className="text-lg font-bold">About</h2>
