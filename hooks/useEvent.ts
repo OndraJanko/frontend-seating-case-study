@@ -2,7 +2,10 @@ import { fetchEvent, fetchEventSeats } from "@/lib/fetchers";
 import { useQuery } from "@tanstack/react-query";
 import { Event, ProcessedSeat } from "@/lib/types";
 
-export default function useEvent(initialEventData: any, initialSeatsData: any) {
+export default function useEvent(
+  initialEventData?: any,
+  initialSeatsData?: any,
+) {
   const eventQuery = useQuery<Event>({
     queryKey: ["event"],
     queryFn: fetchEvent,
