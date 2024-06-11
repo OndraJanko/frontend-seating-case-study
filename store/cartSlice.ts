@@ -21,6 +21,7 @@ const cartSlice = createSlice({
       state.cart.push(action.payload);
       state.totalAmount += 1;
       state.totalPrice += action.payload.price;
+      state.cart.sort((a, b) => a.row - b.row || a.place - b.place);
     },
     removeFromCart: (state, action: PayloadAction<{ id: string }>) => {
       const index = state.cart.findIndex(
