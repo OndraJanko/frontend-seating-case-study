@@ -11,7 +11,7 @@ function makeQueryClient() {
     defaultOptions: {
       queries: {
         staleTime: 60 * 1000,
-        refetchOnMount: false,
+        refetchOnMount: false, // Prevents refetching on mount to avoid double fetching
       },
     },
   });
@@ -38,3 +38,11 @@ export default function QueryProvider({ children }: QueryProviderProps) {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 }
+
+/*
+  Approach for Handling Double Fetch Issue:
+  - refetchOnMount is set to false to prevent double fetching due to hydration of the client.
+  - The API for seats provides random results, which complicates consistent data handling.
+  - As a tradeoff, the user won't get actual data from refreshing the page until an order is placed,
+    either successfully or with an error. This ensures data consistency without redundant API calls.
+*/

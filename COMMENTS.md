@@ -1,30 +1,52 @@
-Documentation, comments and other information about the project
-
 ## Used Technologies
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- Zod
-- Tanstack Query
-- Axios
-- Redux
-- Shadcn/ui
-- React Hook Form
+Next.js
+React
+TypeScript
+Tailwind CSS
+Zod
+Tanstack Query
+Axios
+Redux
+Shadcn/ui
+React Hook Form
 
 ## User Auth
 
-I chose local storage for user sessions to keep the project simple and focused on frontend development, avoiding unnecessary backend complexity.
+Utilized local storage for user sessions to keep the project simple and focused on frontend development.
 
 ## API Calls
 
-I used Axios to make API calls to the backend and utilized Zod to validate the data sent to the backend.
+Used Axios for API calls and Zod for data validation.
 
 ## Seat Map
 
-I used the useZoom hook from the @/hooks/useZoom.ts file to manage the zoom level of the seat map. The handleZoomIn, handleZoomOut, and handleResetZoom functions update the zoom level based on user interactions with the seat map.
+Implemented the useZoom hook to manage zoom levels with handleZoomIn, handleZoomOut, and handleResetZoom functions for user interactions.
 
 ## Prefetching
 
-In this project, I used ReactQuery's prefetching capabilities to fetch data on the server side before rendering components.
+Leveraged ReactQuery's prefetching for server-side data fetching before rendering components.
+
+## State Management
+
+Used Redux for managing Cart and User state, and Tanstack Query for Event and Seat data.
+
+## Skeletons
+
+Implemented Skeleton components for loading states to enhance the user experience during data fetching.
+
+## Tailwind CSS
+
+Styled the app using Tailwind CSS for a consistent look and feel.
+
+## Next.js
+
+Built the app with Next.js for server-side rendering (SSR) to improve initial load times and user experience.
+
+## Tanstack Query
+
+Used Tanstack Query for data fetching and state management, ensuring efficient updates when new data is received.
+
+## Shadcn/ui
+
+Created UI components with Shadcn/ui for a consistent and easy-to-use design across the app.

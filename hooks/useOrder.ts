@@ -41,6 +41,8 @@ export default function useOrder(
       } else {
         onErrorCallback("Unknown error, try again later");
       }
+      queryClient.invalidateQueries({ queryKey: ["event"] });
+      queryClient.invalidateQueries({ queryKey: ["seats"] });
     },
   });
 
