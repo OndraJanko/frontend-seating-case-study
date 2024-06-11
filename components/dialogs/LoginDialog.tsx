@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoginFormInputs, loginSchema } from "@/lib/validationSchemas";
 import useAuth from "@/hooks/useAuth";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import CheckoutDialog from "./CheckoutDialog";
 
 type LoginDialogProps = {
@@ -26,6 +26,7 @@ export default function LoginDialog({
   disabled = false,
 }: LoginDialogProps) {
   const { loginMutation, loginError, resetLoginError } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -44,18 +45,20 @@ export default function LoginDialog({
       if (!open) {
         reset();
         resetLoginError();
+        setIsOpen(false);
       }
     },
     [reset, resetLoginError],
   );
 
   return (
-    <Dialog onOpenChange={handleDialogClose}>
+    <Dialog open={isOpen} onOpenChange={handleDialogClose}>
       <DialogTrigger asChild>
         <Button
           variant="default"
           disabled={disabled}
           aria-label={isGuestCheckout ? "Checkout" : "Login"}
+          onClick={() => setIsOpen(true)}
         >
           {isGuestCheckout ? "Checkout" : "Login"}
         </Button>
@@ -118,6 +121,11 @@ export default function LoginDialog({
                 <CheckoutDialog
                   isGuestCheckout={isGuestCheckout}
                   disabled={loginMutation.isPending}
+                  onClose={() => {
+                    setIsOpen(false);
+                    reset();
+                    resetLoginError();
+                  }}
                 />
               )}
               <Button

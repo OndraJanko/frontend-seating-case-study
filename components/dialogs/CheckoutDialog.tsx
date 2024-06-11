@@ -31,11 +31,13 @@ type TicketSummary = {
 type CheckoutDialogProps = {
   isGuestCheckout?: boolean;
   disabled?: boolean;
+  onClose?: () => void;
 };
 
 export default function CheckoutDialog({
   isGuestCheckout = false,
   disabled = false,
+  onClose,
 }: CheckoutDialogProps) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
@@ -45,6 +47,7 @@ export default function CheckoutDialog({
       toast({ title: res });
       setIsOpen(false);
       dispatch(clearCart());
+      onClose?.();
     },
     (err) => {
       toast({ title: err });
@@ -102,6 +105,7 @@ export default function CheckoutDialog({
     if (!open) {
       reset();
       setIsOpen(false);
+      onClose?.();
     }
   };
 
