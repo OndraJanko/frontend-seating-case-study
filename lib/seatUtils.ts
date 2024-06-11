@@ -1,6 +1,6 @@
 import { ProcessedSeat } from "@/lib/types";
 
-export function processSeatRows(data: ProcessedSeat[]) {
+export function processSeatRows(data: Array<ProcessedSeat>) {
   // Group seats by their row number
   const seatRows = data.reduce(
     (acc, seat) => {

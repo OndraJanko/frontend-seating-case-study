@@ -5,14 +5,14 @@ import SeatLegend from "./SeatLegend";
 import { useZoom } from "@/hooks/useZoom";
 import { processSeatRows } from "@/lib/seatUtils";
 import SeatRow from "./SeatRow";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useRef, useMemo, useEffect, useCallback } from "react";
 import EventSeatsSkeleton from "./skeletons/EventSeatsSkeleton";
 
 export default function EventSeats() {
   const {
     seatsQuery: { data, isLoading, error },
     eventQuery: { isLoading: isEventLoading },
+    maxPlacesPerRow,
   } = useEvent();
   const {
     zoomLevel,
@@ -24,28 +24,66 @@ export default function EventSeats() {
   } = useZoom();
   const divRef = useRef<HTMLDivElement>(null);
 
-  const seatTypes = [
-    { name: "VIP", color: "gold" },
-    { name: "Regular", color: "silver" },
-    { name: "Taken", color: "black" },
-  ];
+  const adjustZoomLevel = useCallback(() => {
+    const width = window.innerWidth;
+    let baseZoomLevel = 0.8;
+    if (maxPlacesPerRow > 10) {
+      baseZoomLevel -= 0.1;
+    } else if (maxPlacesPerRow > 12) {
+      baseZoomLevel -= 0.2;
+    } else if (maxPlacesPerRow > 14) {
+      baseZoomLevel -= 0.3;
+    } else if (maxPlacesPerRow > 15) {
+      baseZoomLevel -= 0.4;
+    } else if (maxPlacesPerRow > 16) {
+      baseZoomLevel -= 0.5;
+    }
+    if (width <= 768) {
+      setDefaultZoomLevel(baseZoomLevel * 0.6);
+      setZoomLevel(baseZoomLevel * 0.6);
+    } else if (width <= 1024) {
+      setDefaultZoomLevel(baseZoomLevel * 0.85);
+      setZoomLevel(baseZoomLevel * 0.85);
+    } else {
+      setDefaultZoomLevel(baseZoomLevel);
+      setZoomLevel(baseZoomLevel);
+    }
+  }, [maxPlacesPerRow, setDefaultZoomLevel, setZoomLevel]);
 
   useEffect(() => {
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile) {
-      setDefaultZoomLevel(0.5);
-      setZoomLevel(0.5);
-    } else {
-      setDefaultZoomLevel(0.8);
-      setZoomLevel(0.8);
-    }
-  }, [setDefaultZoomLevel, setZoomLevel]);
+    adjustZoomLevel();
+  }, [adjustZoomLevel]);
 
   useEffect(() => {
     if (divRef.current) {
       divRef.current.style.transform = `scale(${zoomLevel})`;
     }
   }, [zoomLevel, divRef]);
+
+  const getColor = useMemo(
+    () => (ticketTypeName: string) => {
+      switch (ticketTypeName) {
+        case "VIP ticket":
+          return "gold";
+        case "Regular ticket":
+          return "silver";
+        default:
+          return "gray";
+      }
+    },
+    [],
+  );
+
+  const seatTypes = useMemo(
+    () => [
+      ...(data?.ticketTypes.map((type) => ({
+        name: type.name,
+        color: getColor(type.name),
+      })) || []),
+      { name: "Taken", color: "black" },
+    ],
+    [data, getColor],
+  );
 
   if (isLoading) {
     return <EventSeatsSkeleton />;
@@ -74,10 +112,10 @@ export default function EventSeats() {
   }
   if (!data) return <EventSeatsSkeleton />;
 
-  const { sortedSeatRows, maxColumns } = processSeatRows(data);
+  const { sortedSeatRows, maxColumns } = processSeatRows(data.processedSeats);
 
   return (
-    <div className="white_bg z-[1] flex flex-col items-center justify-center gap-2 overflow-auto rounded-md px-2 pt-[150px] md:px-3 md:pb-[70px]">
+    <div className="white_bg z-[1] flex flex-col items-center justify-center gap-2 overflow-hidden rounded-md px-2 pt-[150px] md:px-3 md:pb-[70px]">
       <div className="absolute left-5 top-5 flex w-full flex-col justify-center">
         <SeatLegend seatTypes={seatTypes} />
         <SeatMapZoom

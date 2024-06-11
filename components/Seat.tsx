@@ -30,8 +30,8 @@ export default function Seat({
     ticketTypeId,
     seatId,
   };
-  const dispatch = useDispatch();
   const { currencyIso } = useEvent();
+  const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const isSelected = useMemo(
     () => cartItems.some((item) => item.id === id),

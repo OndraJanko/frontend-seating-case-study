@@ -1,4 +1,3 @@
-import useEvent from "@/hooks/useEvent";
 import Seat from "./Seat";
 import { ProcessedSeat } from "@/lib/types";
 

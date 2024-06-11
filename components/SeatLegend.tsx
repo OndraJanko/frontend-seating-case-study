@@ -1,5 +1,7 @@
+import { TicketLegend } from "@/lib/types";
+
 type SeatLegendProps = {
-  seatTypes: { name: string; color: string }[];
+  seatTypes: TicketLegend[];
 };
 
 export default function SeatLegend({ seatTypes }: SeatLegendProps) {

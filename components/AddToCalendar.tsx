@@ -22,7 +22,6 @@ type AddToCalendarProps = {
 
 export default function AddToCalendar({ event }: AddToCalendarProps) {
   const [isOpen, setIsOpen] = useState(false);
-
   const googleUrl = google(event);
   const outlookUrl = outlook(event);
   const office365Url = office365(event);

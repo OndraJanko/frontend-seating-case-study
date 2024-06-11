@@ -88,6 +88,16 @@ type ProcessedSeat = {
   seatRow: number;
 };
 
+type ProcessedTicketResponse = {
+  processedSeats: ProcessedSeat[];
+  ticketTypes: TicketResponse[];
+};
+
+type TicketLegend = {
+  name: string;
+  color: string;
+};
+
 export type {
   UUID,
   Event,
@@ -101,4 +111,6 @@ export type {
   OrderRequest,
   OrderResponse,
   ProcessedSeat,
+  ProcessedTicketResponse,
+  TicketLegend,
 };
