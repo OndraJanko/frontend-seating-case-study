@@ -12,13 +12,13 @@ export default function SeatMapZoom({
 }: ZoomControlProps) {
   return (
     <div className="z-10 mb-4 flex gap-2 px-4">
-      <Button onClick={handleZoomOut} aria-label="-">
+      <Button onClick={handleZoomOut} aria-label="Zoom out">
         -
       </Button>
-      <Button onClick={handleZoomIn} aria-label="+">
+      <Button onClick={handleZoomIn} aria-label="Zoom in">
         +
       </Button>
-      <Button onClick={handleResetZoom} aria-label="Reset">
+      <Button onClick={handleResetZoom} aria-label="Reset zoom">
         Reset
       </Button>
     </div>

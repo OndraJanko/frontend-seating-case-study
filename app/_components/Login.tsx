@@ -38,7 +38,7 @@ export default function Login() {
                 alt={`${user.firstName} ${user.lastName} profile picture`}
               />
               <AvatarFallback>
-                <AvatarSkeleton aria-label="Loading avatar" />
+                <AvatarSkeleton aria-label="Loading user profile picture" />
               </AvatarFallback>
             </Avatar>
           </PopoverTrigger>

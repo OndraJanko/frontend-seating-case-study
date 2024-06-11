@@ -4,7 +4,8 @@ export default function SkeletonEventSeats() {
   return (
     <div className="white_bg z-[1] flex flex-col items-center justify-center gap-2 overflow-auto rounded-md px-2 pt-[150px] md:px-3 md:pb-[70px]">
       <div className="absolute left-5 top-5 flex w-full flex-col justify-center">
-        <div className="seat-legend z-10 flex flex-row items-start gap-2 p-4">
+        {/* Seat legend */}
+        <div className="z-10 flex flex-row items-start gap-2 p-4">
           {["VIP", "Regular", "Taken"].map((type) => (
             <div key={type} className="flex items-center gap-2">
               <Skeleton className="h-4 w-4 rounded-full" />
@@ -18,6 +19,7 @@ export default function SkeletonEventSeats() {
           <Skeleton className="h-10 w-10" />
         </div>
       </div>
+      {/* Seat map */}
       <div
         className="transition-transform duration-300 ease-in-out"
         style={{ transformOrigin: "center", transform: "scale(0.5)" }}

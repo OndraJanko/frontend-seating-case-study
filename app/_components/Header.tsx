@@ -5,6 +5,7 @@ import CartSkeleton from "@/components/skeletons/CartSkeleton";
 import LoginSkeleton from "@/components/skeletons/LoginSkeleton";
 import LogoShape from "./LogoShape";
 
+//lazy loads login and cart button
 const Login = dynamic(() => import("./Login"), {
   ssr: false,
   loading: () => <LoginSkeleton />,
@@ -18,7 +19,7 @@ const Cart = dynamic(() => import("./Cart"), {
 function LogoContainer() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-4">
-      <Link href="/" rel="noreferrer" aria-label="Event Seating App Home">
+      <Link href="/" aria-label="Home">
         <LogoShape />
       </Link>
       <div className="hidden md:block">

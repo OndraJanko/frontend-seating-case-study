@@ -16,7 +16,9 @@ export default function SeatRow({
 }: SeatRowProps) {
   const seatsWithGaps = Array.from({ length: maxColumns }, (_, index) => {
     const place = index + 1;
+    // Find the seat in the provided seats array that matches the current place
     const seat = seats.find((seat) => seat.place === place);
+    // If the seat is found, return it; otherwise, return a "Taken" seat to fill the gap
     return seat
       ? seat
       : {

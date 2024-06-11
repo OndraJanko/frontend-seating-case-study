@@ -21,7 +21,7 @@ export default function EventDetails() {
         <div className="text-xl font-bold text-red-600">
           Error loading event details
         </div>
-        <p className="text-md text-gray-600">Please try again later.</p>
+        <p className="text-md text-gray-600">Please try again later</p>
       </div>
     );
   }
@@ -32,7 +32,7 @@ export default function EventDetails() {
         <div className="text-xl font-bold text-gray-600">
           No event details available
         </div>
-        <p className="text-md text-gray-600">Please check back later.</p>
+        <p className="text-md text-gray-600">Please check back later</p>
       </div>
     );
   }

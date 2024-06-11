@@ -58,7 +58,7 @@ export default function EventSeats() {
         <div className="text-xl font-bold text-red-600">
           Error loading event seats
         </div>
-        <p className="text-md text-gray-600">Please try again later.</p>
+        <p className="text-md text-gray-600">Please try again later</p>
       </div>
     );
   }
@@ -69,7 +69,7 @@ export default function EventSeats() {
         <div className="text-xl font-bold text-gray-600">
           No seats available
         </div>
-        <p className="text-md text-gray-600">Please check back later.</p>
+        <p className="text-md text-gray-600">Please check back later</p>
       </div>
     );
   }
