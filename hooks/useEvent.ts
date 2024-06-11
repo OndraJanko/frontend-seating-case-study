@@ -6,7 +6,6 @@ export default function useEvent() {
   const eventQuery = useQuery<Event>({
     queryKey: ["event"],
     queryFn: fetchEvent,
-    staleTime: 60 * 1000,
   });
 
   const eventID = eventQuery.data?.eventId;
@@ -15,7 +14,6 @@ export default function useEvent() {
     queryKey: ["seats", eventID],
     queryFn: () => fetchEventSeats(eventID as string),
     enabled: !!eventID,
-    staleTime: 60 * 1000,
   });
 
   const currencyIso = eventQuery.data?.currencyIso || "";
