@@ -1,29 +1,22 @@
 import { fetchEvent, fetchEventSeats } from "@/lib/fetchers";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Event, ProcessedSeat } from "@/lib/types";
 
 export default function useEvent() {
-  const queryClient = useQueryClient();
-  const initialStateEvent = queryClient.getQueryData<Event>(["event"]);
-
   const eventQuery = useQuery<Event>({
     queryKey: ["event"],
     queryFn: fetchEvent,
-    staleTime: 60 * 1000, // Adjust based on your needs
-    initialData: initialStateEvent,
+    staleTime: 60 * 1000,
   });
 
   const eventID = eventQuery.data?.eventId;
-  const initialStateSeats = eventID
-    ? queryClient.getQueryData<ProcessedSeat[]>(["seats", eventID])
-    : undefined;
 
   const seatsQuery = useQuery<ProcessedSeat[]>({
     queryKey: ["seats", eventID],
-    queryFn: () => fetchEventSeats(eventID!),
+    queryFn: () => fetchEventSeats(eventID as string),
     enabled: !!eventID,
-    staleTime: 60 * 1000, // Adjust based on your needs
-    initialData: initialStateSeats,
+    staleTime: 60 * 1000,
+    initialData: () => (eventID ? undefined : []),
   });
 
   const currencyIso = eventQuery.data?.currencyIso || "";
