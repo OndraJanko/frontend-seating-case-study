@@ -11,6 +11,9 @@ function makeQueryClient() {
     defaultOptions: {
       queries: {
         staleTime: 60 * 1000,
+        refetchOnWindowFocus: false, // Prevent refetch on window focus
+        refetchOnMount: false, // Prevent refetch on mount
+        refetchOnReconnect: false, // Prevent refetch on reconnect
       },
     },
   });
