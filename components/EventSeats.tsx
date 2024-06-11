@@ -9,12 +9,12 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import EventSeatsSkeleton from "./skeletons/EventSeatsSkeleton";
 
-export default function EventSeats({ initialSeatsData }: any) {
+export default function EventSeats() {
   const {
     seatsQuery: { data, isLoading, error },
     eventQuery: { isLoading: isEventLoading },
     currencyIso,
-  } = useEvent(undefined, initialSeatsData);
+  } = useEvent();
   const {
     zoomLevel,
     handleZoomIn,
