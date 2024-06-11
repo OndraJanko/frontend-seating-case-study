@@ -50,13 +50,13 @@ export default function Login() {
             <h3 className="font-bold">Email</h3>
             <p className="mb-4 text-sm">{user.email}</p>
             <div className="flex items-center justify-end">
-              <Button
+              {/* <Button
                 variant="default"
                 onClick={handleLogout}
                 aria-label="Logout"
               >
                 Logout
-              </Button>
+              </Button> */}
             </div>
           </PopoverContent>
         </Popover>
