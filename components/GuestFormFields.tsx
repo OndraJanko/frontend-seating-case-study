@@ -23,10 +23,11 @@ export default function GuestFormFields({
           className="col-span-3"
           type="email"
           {...register("email")}
-          required
         />
         {errors.email && (
-          <p className="col-span-4 text-red-600">{errors.email?.message}</p>
+          <p className="col-span-4 text-end text-sm text-red-600">
+            {errors.email?.message}
+          </p>
         )}
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
@@ -38,10 +39,11 @@ export default function GuestFormFields({
           className="col-span-3"
           type="text"
           {...register("firstName")}
-          required
         />
         {errors.firstName && (
-          <p className="col-span-4 text-red-600">{errors.firstName?.message}</p>
+          <p className="col-span-4 text-end text-sm text-red-600">
+            {errors.firstName?.message}
+          </p>
         )}
       </div>
       <div className="grid grid-cols-4 items-center gap-4 border-b border-gray-200 pb-10">
@@ -53,10 +55,11 @@ export default function GuestFormFields({
           className="col-span-3"
           type="text"
           {...register("lastName")}
-          required
         />
         {errors.lastName && (
-          <p className="col-span-4 text-red-600">{errors.lastName?.message}</p>
+          <p className="col-span-4 text-end text-sm text-red-600">
+            {errors.lastName?.message}
+          </p>
         )}
       </div>
     </>

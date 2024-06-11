@@ -85,11 +85,12 @@ export default function LoginDialog({
               className="col-span-3"
               type="email"
               {...register("email")}
-              required
               autoComplete="email"
             />
             {errors.email && (
-              <p className="col-span-4 text-red-600">{errors.email?.message}</p>
+              <p className="col-span-4 text-end text-sm text-red-600">
+                {errors.email?.message}
+              </p>
             )}
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -101,16 +102,18 @@ export default function LoginDialog({
               className="col-span-3"
               type="password"
               {...register("password")}
-              required
               autoComplete="current-password"
             />
             {errors.password && (
-              <p className="col-span-4 text-red-600">
+              <p className="col-span-4 text-end text-sm text-red-600">
                 {errors.password?.message}
               </p>
             )}
             {loginError && (
-              <p className="col-span-4 text-center text-red-600" role="alert">
+              <p
+                className="col-span-4 text-end text-sm text-red-600"
+                role="alert"
+              >
                 {loginError}
               </p>
             )}
