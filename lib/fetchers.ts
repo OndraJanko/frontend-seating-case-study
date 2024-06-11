@@ -52,16 +52,23 @@ export async function fetchEventSeats(
 
 export async function preFetchData() {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({ queryKey: ["event"], queryFn: fetchEvent });
 
+  // Fetch event data and store in query client
+  await queryClient.prefetchQuery({ queryKey: ["event"], queryFn: fetchEvent });
   const eventData = queryClient.getQueryData<Event>(["event"]);
 
+  // Fetch seats data if eventId is available and store in query client
+  let seatsData = null;
   if (eventData && eventData.eventId) {
     await queryClient.prefetchQuery({
       queryKey: ["seats", eventData.eventId],
       queryFn: () => fetchEventSeats(eventData.eventId),
     });
+    seatsData = queryClient.getQueryData<ProcessedSeat[]>([
+      "seats",
+      eventData.eventId,
+    ]);
   }
 
-  return { eventData, queryClient };
+  return { eventData, seatsData, queryClient };
 }

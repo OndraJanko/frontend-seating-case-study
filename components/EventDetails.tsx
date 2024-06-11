@@ -6,10 +6,10 @@ import AddToCalendar from "./AddToCalendar";
 import { CalendarEvent } from "calendar-link";
 import { formatDateRange } from "@/lib/dateUtils";
 
-export default function EventDetails() {
+export default function EventDetails({ initialEventData }: any) {
   const {
     eventQuery: { data, isLoading, error },
-  } = useEvent();
+  } = useEvent(initialEventData, undefined);
 
   if (isLoading) {
     return <EventDetailsSkeleton />;
