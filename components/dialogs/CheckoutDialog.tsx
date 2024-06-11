@@ -143,13 +143,15 @@ export default function CheckoutDialog({
               totalPrice={totalPrice}
             />
             <DialogFooter>
-              <Button
-                type="submit"
-                disabled={orderMutation.isPending}
-                aria-label="Place order"
-              >
-                {orderMutation.isPending ? "Processing..." : "Place order"}
-              </Button>
+              <div className="flex items-center justify-end">
+                <Button
+                  type="submit"
+                  disabled={orderMutation.isPending}
+                  aria-label="Place order"
+                >
+                  {orderMutation.isPending ? "Processing..." : "Place order"}
+                </Button>
+              </div>
             </DialogFooter>
           </form>
         ) : (
