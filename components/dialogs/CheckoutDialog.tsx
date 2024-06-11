@@ -61,7 +61,7 @@ export default function CheckoutDialog({
     resolver: zodResolver(guestCheckoutSchema),
   });
   const handlePlaceOrder = useCallback(
-    (formInputData: GuestCheckoutFormInputs) => {
+    (formInputData?: GuestCheckoutFormInputs) => {
       if (!event || cartItems.length === 0 || (!isGuestCheckout && !user))
         return;
       const orderData = {
@@ -72,9 +72,9 @@ export default function CheckoutDialog({
         })),
         user: isGuestCheckout
           ? {
-              email: formInputData.email,
-              firstName: formInputData.firstName,
-              lastName: formInputData.lastName,
+              email: formInputData?.email ?? "",
+              firstName: formInputData?.firstName ?? "",
+              lastName: formInputData?.lastName ?? "",
             }
           : {
               email: user?.email ?? "",
@@ -137,7 +137,11 @@ export default function CheckoutDialog({
               totalPrice={totalPrice}
             />
             <DialogFooter>
-              <Button type="submit" disabled={orderMutation.isPending}>
+              <Button
+                type="submit"
+                disabled={orderMutation.isPending}
+                aria-label="Place order"
+              >
                 {orderMutation.isPending ? "Processing..." : "Place order"}
               </Button>
             </DialogFooter>
@@ -152,10 +156,9 @@ export default function CheckoutDialog({
             />
             <DialogFooter>
               <Button
-                onClick={() =>
-                  handlePlaceOrder({ email: "", firstName: "", lastName: "" })
-                }
+                onClick={() => handlePlaceOrder()}
                 disabled={orderMutation.isPending}
+                aria-label="Place order"
               >
                 {orderMutation.isPending ? "Processing..." : "Place order"}
               </Button>

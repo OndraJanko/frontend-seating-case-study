@@ -52,7 +52,11 @@ export default function LoginDialog({
   return (
     <Dialog onOpenChange={handleDialogClose}>
       <DialogTrigger asChild>
-        <Button variant="default" className="md:text-xl" disabled={disabled}>
+        <Button
+          variant="default"
+          disabled={disabled}
+          aria-label={isGuestCheckout ? "Checkout" : "Login"}
+        >
           {isGuestCheckout ? "Checkout" : "Login"}
         </Button>
       </DialogTrigger>
@@ -109,15 +113,21 @@ export default function LoginDialog({
             )}
           </div>
           <DialogFooter>
-            {isGuestCheckout && (
-              <CheckoutDialog
-                isGuestCheckout={isGuestCheckout}
+            <div className="flex flex-row items-center justify-end gap-2">
+              {isGuestCheckout && (
+                <CheckoutDialog
+                  isGuestCheckout={isGuestCheckout}
+                  disabled={loginMutation.isPending}
+                />
+              )}
+              <Button
+                type="submit"
                 disabled={loginMutation.isPending}
-              />
-            )}
-            <Button type="submit" disabled={loginMutation.isPending}>
-              {loginMutation.isPending ? "Processing..." : "Login"}
-            </Button>
+                aria-label="Login"
+              >
+                {loginMutation.isPending ? "Processing..." : "Login"}
+              </Button>
+            </div>
           </DialogFooter>
         </form>
       </DialogContent>
