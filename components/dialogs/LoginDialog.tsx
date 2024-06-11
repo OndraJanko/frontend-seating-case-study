@@ -76,7 +76,7 @@ export default function LoginDialog({
           className="grid gap-4 py-4"
           aria-live="polite"
         >
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 items-center gap-x-4 gap-y-1">
             <Label htmlFor="email" className="text-right">
               Email
             </Label>
@@ -93,7 +93,7 @@ export default function LoginDialog({
               </p>
             )}
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 items-center gap-x-4 gap-y-1">
             <Label htmlFor="password" className="text-right">
               Password
             </Label>

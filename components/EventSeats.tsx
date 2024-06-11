@@ -13,7 +13,6 @@ export default function EventSeats() {
   const {
     seatsQuery: { data, isLoading, error },
     eventQuery: { isLoading: isEventLoading },
-    currencyIso,
   } = useEvent();
   const {
     zoomLevel,
@@ -97,13 +96,7 @@ export default function EventSeats() {
         }}
       >
         {sortedSeatRows.map(({ row, seats }) => (
-          <SeatRow
-            key={row}
-            row={row}
-            seats={seats}
-            maxColumns={maxColumns}
-            currencyIso={currencyIso}
-          />
+          <SeatRow key={row} row={row} seats={seats} maxColumns={maxColumns} />
         ))}
       </div>
     </div>

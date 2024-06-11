@@ -1,3 +1,4 @@
+import useEvent from "@/hooks/useEvent";
 import Seat from "./Seat";
 import { ProcessedSeat } from "@/lib/types";
 
@@ -5,15 +6,9 @@ type SeatRowProps = {
   row: number;
   seats: ProcessedSeat[];
   maxColumns: number;
-  currencyIso: string;
 };
 
-export default function SeatRow({
-  row,
-  seats,
-  maxColumns,
-  currencyIso,
-}: SeatRowProps) {
+export default function SeatRow({ row, seats, maxColumns }: SeatRowProps) {
   const seatsWithGaps = Array.from({ length: maxColumns }, (_, index) => {
     const place = index + 1;
     // Find the seat in the provided seats array that matches the current place
@@ -48,10 +43,9 @@ export default function SeatRow({
           key={seat.seatId}
           id={seat.seatId}
           place={seat.place}
-          seatRow={seat.seatRow}
+          row={seat.seatRow}
           price={seat.price}
-          ticketTypeName={seat.ticketTypeName}
-          currencyIso={currencyIso}
+          name={seat.ticketTypeName}
           ticketTypeId={seat.ticketTypeId}
           seatId={seat.seatId}
         />

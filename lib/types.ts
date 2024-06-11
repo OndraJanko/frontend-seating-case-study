@@ -22,6 +22,8 @@ type Ticket = {
   ticketTypeId: UUID;
   seatId: string;
   name: string;
+  place: number;
+  row: number;
 };
 
 type Seat = {

@@ -16,7 +16,7 @@ import useOrder from "@/hooks/useOrder";
 import useEvent from "@/hooks/useEvent";
 import { useToast } from "@/components/ui/use-toast";
 import { clearCart } from "@/store/cartSlice";
-import { selectCheckoutData } from "@/lib/selectors";
+import { selectCheckoutData, selectIsCartEmpty } from "@/lib/selectors";
 import {
   guestCheckoutSchema,
   GuestCheckoutFormInputs,
@@ -55,6 +55,8 @@ export default function CheckoutDialog({
   );
   const { data: event } = useEvent().eventQuery;
   const { totalPrice, cartItems, user } = useSelector(selectCheckoutData);
+  const isCartEmpty = useSelector(selectIsCartEmpty);
+
   const {
     register,
     handleSubmit,
@@ -135,7 +137,7 @@ export default function CheckoutDialog({
           >
             <GuestFormFields register={register} errors={errors} />
             <OrderSummary
-              cartItems={cartItems}
+              isCartEmpty={isCartEmpty}
               ticketSummary={ticketSummary}
               event={event}
               totalPrice={totalPrice}
@@ -153,7 +155,7 @@ export default function CheckoutDialog({
         ) : (
           <div className="flex flex-col gap-6 py-4">
             <OrderSummary
-              cartItems={cartItems}
+              isCartEmpty={isCartEmpty}
               ticketSummary={ticketSummary}
               event={event}
               totalPrice={totalPrice}

@@ -77,21 +77,30 @@ export default function Cart() {
             cartItems.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center justify-between gap-3"
+                className="flex flex-col items-center justify-between gap-2"
               >
-                <div className="flex w-full items-end justify-between gap-4">
-                  <Label>{item.name}</Label>
-                  <Label>{formatCurrency(item.price, currencyIso)}</Label>
+                <div className="flex w-full items-center justify-between gap-4">
+                  <Label className="font-bold">{item.name}</Label>
+                  <div className="flex items-center justify-center gap-2">
+                    <Label className="text-end">
+                      {formatCurrency(item.price, currencyIso)}
+                    </Label>
+                    <Button
+                      type="button"
+                      size="sm"
+                      className="h-2 w-2 p-3"
+                      onClick={() => handleRemoveFromCart(item.id)}
+                      aria-label={`Remove ${item.name} from cart`}
+                    >
+                      x
+                    </Button>
+                  </div>
                 </div>
-                <Button
-                  type="button"
-                  size="sm"
-                  className="h-2 w-2 p-3"
-                  onClick={() => handleRemoveFromCart(item.id)}
-                  aria-label={`Remove ${item.name} from cart`}
-                >
-                  x
-                </Button>
+                <div className="flex w-full items-center justify-start gap-4">
+                  <Label className="text-xs">
+                    {"Row " + item.row + ", Place " + item.place}
+                  </Label>
+                </div>
               </div>
             ))}
         </div>

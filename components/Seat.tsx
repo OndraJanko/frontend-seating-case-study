@@ -9,29 +9,29 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import formatCurrency from "@/lib/currencyUtils";
-
-type SeatProps = {
-  id: string;
-  place: number;
-  seatRow: number;
-  price: number;
-  ticketTypeName: string;
-  currencyIso: string;
-  ticketTypeId: string;
-  seatId: string;
-};
+import { Ticket } from "@/lib/types";
+import useEvent from "@/hooks/useEvent";
 
 export default function Seat({
   id,
   place,
-  seatRow,
+  row,
   price,
-  ticketTypeName,
-  currencyIso,
+  name,
   ticketTypeId,
   seatId,
-}: SeatProps) {
+}: Ticket) {
+  const ticket = {
+    id,
+    price,
+    name,
+    place,
+    row,
+    ticketTypeId,
+    seatId,
+  };
   const dispatch = useDispatch();
+  const { currencyIso } = useEvent();
   const cartItems = useSelector(selectCartItems);
   const isSelected = useMemo(
     () => cartItems.some((item) => item.id === id),
@@ -39,18 +39,17 @@ export default function Seat({
   );
 
   const handleSeatClick = () => {
-    const seat = { id, ticketTypeId, seatId, price, name: ticketTypeName };
-    const action = isSelected ? removeFromCart({ id }) : addToCart(seat);
+    const action = isSelected ? removeFromCart({ id }) : addToCart(ticket);
     dispatch(action);
   };
 
   const seatContent = (
     <div
-      onClick={ticketTypeName !== "Taken" ? handleSeatClick : undefined}
+      onClick={name !== "Taken" ? handleSeatClick : undefined}
       className={`z-0 flex h-10 w-10 items-center justify-center rounded-full ${
-        ticketTypeName === "Taken"
+        name === "Taken"
           ? "bg-black text-white"
-          : ticketTypeName === "VIP ticket"
+          : name === "VIP ticket"
             ? isSelected
               ? "cursor-pointer border-2 border-black bg-yellow-400"
               : "cursor-pointer bg-yellow-200 hover:bg-yellow-300"
@@ -63,13 +62,13 @@ export default function Seat({
     </div>
   );
 
-  return ticketTypeName !== "Taken" ? (
+  return name !== "Taken" ? (
     <HoverCard>
       <HoverCardTrigger asChild>{seatContent}</HoverCardTrigger>
       <HoverCardContent className="space-y-2 p-4 text-left text-sm">
         <div>
-          <h4 className="font-semibold">Ticket: {ticketTypeName}</h4>
-          <p>Row: {seatRow}</p>
+          <h4 className="font-semibold">Ticket: {name}</h4>
+          <p>Row: {row}</p>
           <p>Place: {place}</p>
           <p>Price: {formatCurrency(price, currencyIso)}</p>
         </div>

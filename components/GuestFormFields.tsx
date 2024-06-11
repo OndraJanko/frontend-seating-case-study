@@ -14,7 +14,7 @@ export default function GuestFormFields({
 }: GuestFormFieldsProps) {
   return (
     <>
-      <div className="grid grid-cols-4 items-center gap-4">
+      <div className="grid grid-cols-4 items-center gap-x-4 gap-y-1">
         <Label htmlFor="email" className="text-right">
           Email
         </Label>
@@ -30,7 +30,7 @@ export default function GuestFormFields({
           </p>
         )}
       </div>
-      <div className="grid grid-cols-4 items-center gap-4">
+      <div className="grid grid-cols-4 items-center gap-x-4 gap-y-1">
         <Label htmlFor="firstName" className="text-right">
           First Name
         </Label>
@@ -46,7 +46,7 @@ export default function GuestFormFields({
           </p>
         )}
       </div>
-      <div className="grid grid-cols-4 items-center gap-4 border-b border-gray-200 pb-10">
+      <div className="grid grid-cols-4 items-center gap-x-4 gap-y-1 border-b border-gray-200 pb-10">
         <Label htmlFor="lastName" className="text-right">
           Last Name
         </Label>
