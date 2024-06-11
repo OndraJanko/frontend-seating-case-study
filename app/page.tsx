@@ -22,9 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const { queryClient } = await preFetchData();
+  const dehydratedState = dehydrate(queryClient);
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
+    <HydrationBoundary state={dehydratedState}>
       <main className="flex w-full flex-col gap-5 overflow-x-hidden px-3 py-8 md:flex-row md:px-5 lg:px-20">
         <div className="relative flex h-full w-full md:w-1/3">
           <EventDetails />

@@ -4,24 +4,26 @@ import { Event, ProcessedSeat } from "@/lib/types";
 
 export default function useEvent() {
   const queryClient = useQueryClient();
-  const initialStateEvent = queryClient.getQueryData(["event"]);
+  const initialStateEvent = queryClient.getQueryData<Event>(["event"]);
+
   const eventQuery = useQuery<Event>({
     queryKey: ["event"],
     queryFn: fetchEvent,
-    staleTime: 60 * 1000,
-    initialData: initialStateEvent! as Event,
+    staleTime: 60 * 1000, // Adjust based on your needs
+    initialData: initialStateEvent,
   });
 
   const eventID = eventQuery.data?.eventId;
+  const initialStateSeats = eventID
+    ? queryClient.getQueryData<ProcessedSeat[]>(["seats", eventID])
+    : undefined;
 
-  const initialStateSeats = queryClient.getQueryData(["seats", eventID]);
-
-  const seatsQuery = useQuery({
+  const seatsQuery = useQuery<ProcessedSeat[]>({
     queryKey: ["seats", eventID],
-    queryFn: () => fetchEventSeats(eventID as string),
+    queryFn: () => fetchEventSeats(eventID!),
     enabled: !!eventID,
-    staleTime: 60 * 1000,
-    initialData: initialStateSeats as ProcessedSeat[],
+    staleTime: 60 * 1000, // Adjust based on your needs
+    initialData: initialStateSeats,
   });
 
   const currencyIso = eventQuery.data?.currencyIso || "";
