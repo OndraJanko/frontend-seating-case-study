@@ -3,12 +3,13 @@ import { useSelector } from "react-redux";
 import useEvent from "@/hooks/useEvent";
 import TicketCheckoutSkeleton from "@/components/skeletons/TicketCheckoutSkeleton";
 import CheckoutDialog from "./dialogs/CheckoutDialog";
-import GuestCheckoutDialog from "./dialogs/GuestCheckoutDialog";
+import LoginDialog from "./dialogs/LoginDialog";
 
 import {
   selectTotalItems,
   selectTotalPrice,
   selectIsLoggedIn,
+  selectIsCartEmpty,
 } from "@/lib/selectors";
 import formatCurrency from "@/lib/currencyUtils";
 
@@ -32,6 +33,7 @@ export default function TicketCheckout() {
     eventQuery: { isLoading },
   } = useEvent();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isEmpty = useSelector(selectIsCartEmpty);
 
   if (isLoading) {
     return <TicketCheckoutSkeleton />;
@@ -40,7 +42,11 @@ export default function TicketCheckout() {
   return (
     <div className="white_bg flex flex-row items-center justify-between gap-2 rounded-md px-4 py-4 md:px-9 md:py-5">
       <TicketInfo />
-      {isLoggedIn ? <CheckoutDialog /> : <GuestCheckoutDialog />}
+      {isLoggedIn ? (
+        <CheckoutDialog disabled={isEmpty} />
+      ) : (
+        <LoginDialog isGuestCheckout={true} disabled={isEmpty} />
+      )}
     </div>
   );
 }

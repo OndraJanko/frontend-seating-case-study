@@ -68,7 +68,7 @@ export default function Login() {
           </PopoverContent>
         </Popover>
       ) : (
-        <LoginDialog buttonText="Login" />
+        <LoginDialog />
       )}
     </div>
   );

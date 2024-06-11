@@ -15,11 +15,16 @@ import { Label } from "@/components/ui/label";
 import { LoginFormInputs, loginSchema } from "@/lib/validationSchemas";
 import useAuth from "@/hooks/useAuth";
 import { useCallback } from "react";
+import CheckoutDialog from "./CheckoutDialog";
 
 type LoginDialogProps = {
-  buttonText: string;
+  isGuestCheckout?: boolean;
+  disabled?: boolean;
 };
-export default function LoginDialog({ buttonText }: LoginDialogProps) {
+export default function LoginDialog({
+  isGuestCheckout = false,
+  disabled = false,
+}: LoginDialogProps) {
   const { loginMutation, loginError, resetLoginError } = useAuth();
   const {
     register,
@@ -47,8 +52,8 @@ export default function LoginDialog({ buttonText }: LoginDialogProps) {
   return (
     <Dialog onOpenChange={handleDialogClose}>
       <DialogTrigger asChild>
-        <Button variant="default" className="md:text-xl">
-          {buttonText}
+        <Button variant="default" className="md:text-xl" disabled={disabled}>
+          {isGuestCheckout ? "Checkout" : "Login"}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -74,6 +79,7 @@ export default function LoginDialog({ buttonText }: LoginDialogProps) {
               type="email"
               {...register("email")}
               required
+              autoComplete="email"
             />
             {errors.email && (
               <p className="col-span-4 text-red-600">{errors.email?.message}</p>
@@ -89,6 +95,7 @@ export default function LoginDialog({ buttonText }: LoginDialogProps) {
               type="password"
               {...register("password")}
               required
+              autoComplete="current-password"
             />
             {errors.password && (
               <p className="col-span-4 text-red-600">
@@ -102,6 +109,12 @@ export default function LoginDialog({ buttonText }: LoginDialogProps) {
             )}
           </div>
           <DialogFooter>
+            {isGuestCheckout && (
+              <CheckoutDialog
+                isGuestCheckout={isGuestCheckout}
+                disabled={loginMutation.isPending}
+              />
+            )}
             <Button type="submit" disabled={loginMutation.isPending}>
               {loginMutation.isPending ? "Processing..." : "Login"}
             </Button>
