@@ -42,13 +42,13 @@ export default function LoginDialog({
 
   const handleDialogClose = useCallback(
     (open: boolean) => {
-      if (!open) {
+      if (!open && !loginMutation.isPending) {
         reset();
         resetLoginError();
         setIsOpen(false);
       }
     },
-    [reset, resetLoginError],
+    [reset, resetLoginError, loginMutation],
   );
 
   return (

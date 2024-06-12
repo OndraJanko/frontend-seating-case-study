@@ -103,13 +103,16 @@ export default function CheckoutDialog({
     }, {} as TicketSummary);
   }, [cartItems]);
 
-  const handleDialogClose = (open: boolean) => {
-    if (!open) {
-      reset();
-      setIsOpen(false);
-      onClose?.();
-    }
-  };
+  const handleDialogClose = useCallback(
+    (open: boolean) => {
+      if (!open && !orderMutation.isPending) {
+        reset();
+        setIsOpen(false);
+        onClose?.();
+      }
+    },
+    [reset, orderMutation.isPending, onClose],
+  );
 
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogClose}>
