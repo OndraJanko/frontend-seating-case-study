@@ -12,6 +12,7 @@ function makeQueryClient() {
       queries: {
         staleTime: 60 * 1000,
         refetchOnMount: false, // Prevents refetching on mount to avoid double fetching
+        refetchOnWindowFocus: false, // Prevents refetching on window focus
       },
     },
   });
