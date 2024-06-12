@@ -12,6 +12,7 @@ import useEvent from "@/hooks/useEvent";
 import { useEffect } from "react";
 import { selectCartItems, selectIsCartEmpty } from "@/lib/selectors";
 import formatCurrency from "@/lib/currencyUtils";
+import { cn } from "@/lib/utils";
 
 export default function Cart() {
   const cartItems = useSelector(selectCartItems);
@@ -60,11 +61,27 @@ export default function Cart() {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="max-h-[300px] w-80 overflow-auto px-0 pt-0">
-        <div className="sticky top-0 space-y-1 border-b border-gray-200 bg-white px-4 py-5">
+        <div
+          className={cn(
+            "sticky top-0 border-b border-gray-200 bg-white px-4 py-5",
+            isEmpty && "space-y-2",
+          )}
+        >
           <h4 className="font-medium leading-none">Cart</h4>
-          <p className="text-sm text-muted-foreground">
-            Here you can see your order.
-          </p>
+          <div className="flex flex-row items-center justify-between gap-1">
+            <p className="text-sm text-muted-foreground">
+              Here you can see your order.
+            </p>
+            {!isEmpty && (
+              <Button
+                size={"sm"}
+                onClick={() => dispatch(clearCart())}
+                aria-label="Clear cart"
+              >
+                Clear
+              </Button>
+            )}
+          </div>
         </div>
         <div className="grid gap-4 px-4 py-5">
           {isEmpty && (
@@ -73,36 +90,39 @@ export default function Cart() {
               tickets to your cart!
             </div>
           )}
-          {!isEmpty &&
-            cartItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex flex-col items-center justify-between gap-2"
-              >
-                <div className="flex w-full items-center justify-between gap-4">
-                  <Label className="font-bold">{item.name}</Label>
-                  <div className="flex items-center justify-center gap-2">
-                    <Label className="text-end">
-                      {formatCurrency(item.price, currencyIso)}
+          {!isEmpty && (
+            <>
+              {cartItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex flex-col items-center justify-between gap-2"
+                >
+                  <div className="flex w-full items-center justify-between gap-4">
+                    <Label className="font-bold">{item.name}</Label>
+                    <div className="flex items-center justify-center gap-2">
+                      <Label className="text-end">
+                        {formatCurrency(item.price, currencyIso)}
+                      </Label>
+                      <Button
+                        type="button"
+                        size="sm"
+                        className="h-6 w-6 p-3"
+                        onClick={() => handleRemoveFromCart(item.id)}
+                        aria-label={`Remove ${item.name} from cart`}
+                      >
+                        x
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="flex w-full items-center justify-start gap-4">
+                    <Label className="text-xs">
+                      {"Row " + item.row + ", Place " + item.place}
                     </Label>
-                    <Button
-                      type="button"
-                      size="sm"
-                      className="h-2 w-2 p-3"
-                      onClick={() => handleRemoveFromCart(item.id)}
-                      aria-label={`Remove ${item.name} from cart`}
-                    >
-                      x
-                    </Button>
                   </div>
                 </div>
-                <div className="flex w-full items-center justify-start gap-4">
-                  <Label className="text-xs">
-                    {"Row " + item.row + ", Place " + item.place}
-                  </Label>
-                </div>
-              </div>
-            ))}
+              ))}
+            </>
+          )}
         </div>
       </PopoverContent>
     </Popover>
