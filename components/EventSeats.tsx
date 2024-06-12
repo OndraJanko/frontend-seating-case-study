@@ -7,6 +7,7 @@ import { processSeatRows } from "@/lib/seatUtils";
 import SeatRow from "./SeatRow";
 import { useRef, useMemo, useEffect, useCallback } from "react";
 import EventSeatsSkeleton from "./skeletons/EventSeatsSkeleton";
+import { debounce } from "lodash";
 
 export default function EventSeats() {
   const {
@@ -50,15 +51,25 @@ export default function EventSeats() {
     }
   }, [maxPlacesPerRow, setDefaultZoomLevel, setZoomLevel]);
 
+  const debouncedAdjustZoomLevel = useMemo(
+    () => debounce(adjustZoomLevel, 100),
+    [adjustZoomLevel],
+  );
+
   useEffect(() => {
-    adjustZoomLevel();
-  }, [adjustZoomLevel]);
+    debouncedAdjustZoomLevel();
+    window.addEventListener("resize", debouncedAdjustZoomLevel);
+    return () => {
+      window.removeEventListener("resize", debouncedAdjustZoomLevel);
+      debouncedAdjustZoomLevel.cancel();
+    };
+  }, [debouncedAdjustZoomLevel]);
 
   useEffect(() => {
     if (divRef.current) {
       divRef.current.style.transform = `scale(${zoomLevel})`;
     }
-  }, [zoomLevel, divRef]);
+  }, [zoomLevel]);
 
   const getColor = useMemo(
     () => (ticketTypeName: string) => {
