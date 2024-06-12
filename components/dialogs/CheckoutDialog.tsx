@@ -122,7 +122,10 @@ export default function CheckoutDialog({
           {isGuestCheckout ? "Continue as guest" : "Checkout"}
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent
+        className="sm:max-w-[425px]"
+        noBackground={isGuestCheckout}
+      >
         <DialogHeader>
           <DialogTitle>Checkout summary</DialogTitle>
           <DialogDescription>
