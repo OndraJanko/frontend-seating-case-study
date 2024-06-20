@@ -29,9 +29,5 @@ export function processSeatRows(data: Array<ProcessedSeat>) {
       return { row: Number(row), seats: sortedSeats };
     });
 
-  const maxColumns = Math.max(
-    ...sortedSeatRows.map(({ seats }) => seats[seats.length - 1].place),
-  );
-
-  return { sortedSeatRows, maxColumns };
+  return { sortedSeatRows };
 }

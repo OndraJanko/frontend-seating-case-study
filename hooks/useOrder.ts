@@ -32,8 +32,6 @@ export default function useOrder(
     mutationFn: createOrder,
     onSuccess: (response) => {
       onSuccessCallback(response.data.message);
-      queryClient.invalidateQueries({ queryKey: ["event"] });
-      queryClient.invalidateQueries({ queryKey: ["seats"] });
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
@@ -41,6 +39,8 @@ export default function useOrder(
       } else {
         onErrorCallback("Unknown error, try again later");
       }
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["event"] });
       queryClient.invalidateQueries({ queryKey: ["seats"] });
     },

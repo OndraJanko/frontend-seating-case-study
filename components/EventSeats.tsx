@@ -123,7 +123,7 @@ export default function EventSeats() {
   }
   if (!data) return <EventSeatsSkeleton />;
 
-  const { sortedSeatRows, maxColumns } = processSeatRows(data.processedSeats);
+  const { sortedSeatRows } = processSeatRows(data.processedSeats);
 
   return (
     <div className="white_bg z-[1] flex flex-col items-center justify-center gap-2 overflow-hidden rounded-md px-2 pt-[150px] md:px-3 md:pb-[70px]">
@@ -145,7 +145,12 @@ export default function EventSeats() {
         }}
       >
         {sortedSeatRows.map(({ row, seats }) => (
-          <SeatRow key={row} row={row} seats={seats} maxColumns={maxColumns} />
+          <SeatRow
+            key={row}
+            row={row}
+            seats={seats}
+            maxColumns={maxPlacesPerRow}
+          />
         ))}
       </div>
     </div>
